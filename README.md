@@ -1,4 +1,5 @@
 # Verizon India (VDSI) Hackathon July 2015
+<img src="https://travis-ci.org/aroychoudhury/VerizonHackathon2015.svg"/><br/>
 This is the Project created for Verizon India (VDSI) Hackathon 2015.
 
 <b>Event Details</b>
