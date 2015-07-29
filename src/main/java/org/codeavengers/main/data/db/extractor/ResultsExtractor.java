@@ -12,7 +12,6 @@ import java.util.List;
 import org.codeavengers.common.dto.impl.Result;
 import org.codeavengers.common.dto.impl.Results;
 import org.codeavengers.common.exception.DataLayerFailureException;
-import org.codeavengers.spring.db.AbstractExtractor;
 
 /**
  * TODO

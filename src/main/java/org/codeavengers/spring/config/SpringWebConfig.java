@@ -21,14 +21,14 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @Configuration
 @ComponentScan({
-    "org.codeavengers.spring.web"
+    "org.codeavengers.main.web"
 })
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/index.html").addResourceLocations("/");
+        registry.addResourceHandler("/index.html").addResourceLocations("/index.html");
     }
 
     @Override

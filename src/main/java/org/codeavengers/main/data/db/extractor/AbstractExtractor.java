@@ -1,6 +1,6 @@
 /* Copyright 2015 Code Avengers */
 
-package org.codeavengers.spring.db;
+package org.codeavengers.main.data.db.extractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -3,7 +3,7 @@
 package org.codeavengers.main.data;
 
 import org.codeavengers.common.exception.DataLayerFailureException;
-import org.codeavengers.spring.db.utils.JdbcExecuter;
+import org.codeavengers.main.db.utils.JdbcExecuter;
 
 /**
  * Read-only implementation of the Persister interface. This class implements
