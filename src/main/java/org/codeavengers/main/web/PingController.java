@@ -27,7 +27,7 @@ public class PingController {
     @RequestMapping(value = "/ping-default", method = RequestMethod.GET)
     public ResponseEntity<String> pingDefault() {
         System.out.println("Ping Default reached");
-        //System.out.println(persister.retrieve(new Long(1L)));
+        System.out.println(persister.retrieve(new Long(1L)));
         return new ResponseEntity<String>("Hello World", HttpStatus.OK);
     }
 }

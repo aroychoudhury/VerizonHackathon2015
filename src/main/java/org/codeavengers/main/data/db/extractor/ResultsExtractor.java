@@ -121,38 +121,55 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
         switch (dbType) {
             case Types.NUMERIC:
                 resolvedValue = resultSet.getBigDecimal(colnIndex).toString();
+                break;
             case Types.TINYINT:
                 resolvedValue = Byte.toString(resultSet.getByte(colnIndex));
+                break;
             case Types.SMALLINT:
                 resolvedValue = Short.toString(resultSet.getShort(colnIndex));
+                break;
             case Types.INTEGER:
                 resolvedValue = Integer.toString(resultSet.getInt(colnIndex));
+                break;
             case Types.BIGINT:
                 resolvedValue = Long.toString(resultSet.getLong(colnIndex));
+                break;
             case Types.DECIMAL:
                 resolvedValue = resultSet.getBigDecimal(colnIndex).toString();
+                break;
             case Types.REAL:
                 resolvedValue = Float.toString(resultSet.getFloat(colnIndex));
+                break;
             case Types.FLOAT:
                 resolvedValue = Double.toString(resultSet.getDouble(colnIndex));
+                break;
             case Types.DOUBLE:
                 resolvedValue = Double.toString(resultSet.getDouble(colnIndex));
+                break;
             case Types.CHAR:
                 resolvedValue = resultSet.getString(colnIndex);
+                break;
             case Types.VARCHAR:
                 resolvedValue = resultSet.getString(colnIndex);
+                break;
             case Types.LONGVARCHAR:
                 resolvedValue = resultSet.getString(colnIndex);
+                break;
             case Types.DATE:
                 resolvedValue = resultSet.getDate(colnIndex).toString();
+                break;
             case Types.TIME:
                 resolvedValue = resultSet.getTime(colnIndex).toString();
+                break;
             case Types.TIMESTAMP:
                 resolvedValue = resultSet.getTimestamp(colnIndex).toString();
+                break;
             case Types.BOOLEAN:
                 resolvedValue = Boolean.toString(resultSet.getBoolean(colnIndex));
+                break;
             default:
                 resolvedValue = "";
+                break;
         }
         return resolvedValue;
     }
