@@ -3,7 +3,6 @@
 package org.codeavengers.main.data;
 
 import org.codeavengers.common.exception.DataLayerFailureException;
-import org.codeavengers.main.data.db.utils.JdbcExecuter;
 
 /**
  * Read-only implementation of the Persister interface. This class implements
@@ -13,7 +12,7 @@ import org.codeavengers.main.data.db.utils.JdbcExecuter;
  * @author abhishek
  * @since 1.0
  */
-public abstract class AbstractReadOnlyPersister extends JdbcExecuter implements Persister {
+public abstract class AbstractReadOnlyPersister extends AbstractPersister implements Persister {
     /**
      * @throws DataLayerFailureException
      *             {@inheritDoc}
