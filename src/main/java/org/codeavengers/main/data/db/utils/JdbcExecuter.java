@@ -1,6 +1,6 @@
 /* Copyright 2015 Code Avengers */
 
-package org.codeavengers.main.db.utils;
+package org.codeavengers.main.data.db.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
