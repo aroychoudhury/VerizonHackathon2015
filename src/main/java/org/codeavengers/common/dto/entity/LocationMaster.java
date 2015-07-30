@@ -4,6 +4,7 @@
 package org.codeavengers.common.dto.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,11 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.codeavengers.common.dto.DataObject;
 
 /**
  * This is the JPA Entity for <b>LOCATION_MASTER</b>.
@@ -28,15 +26,16 @@ import org.codeavengers.common.dto.DataObject;
  */
 @Entity
 @Table(name = "LOCATION_MASTER")
-@SequenceGenerator(name = "locationId", sequenceName = "locationId")
-public class LocationMaster extends DataObject implements Serializable {
-    private static final long serialVersionUID = -6580838413207923482L;
-    private Long locationId;
+@SequenceGenerator(name = "locationId", sequenceName = "locationId", allocationSize = 1, initialValue = 1)
+public class LocationMaster implements Serializable {
+	private static final long serialVersionUID = 5993116595957248610L;
+	private Long locationId;
+	private Long parentLocationId;
 	private String area;
 	private String code;
-	private Long parentLocationId;
-	private LocationDetails locationDetails;
-	private List<LocationCategoryAssn> assn;
+	private String latitude;
+	private String longitude;
+	private List<LocationCategoryAssn> associations;
 
 	/**
 	 * @return the locationId
@@ -58,6 +57,26 @@ public class LocationMaster extends DataObject implements Serializable {
 	 */
 	public void setLocationId(Long locationId) {
 		this.locationId = locationId;
+	}
+
+	/**
+	 * @return the parentLocationId
+	 * @author abhishek
+	 * @since 1.0
+	 */
+	@Column(name = "parentLocationId", nullable = false)
+	public Long getParentLocationId() {
+		return parentLocationId;
+	}
+
+	/**
+	 * @param parentLocationId
+	 *            the parentLocationId to set
+	 * @author abhishek
+	 * @since 1.0
+	 */
+	public void setParentLocationId(Long parentLocationId) {
+		this.parentLocationId = parentLocationId;
 	}
 
 	/**
@@ -101,62 +120,118 @@ public class LocationMaster extends DataObject implements Serializable {
 	}
 
 	/**
-	 * @return the parentLocationId
+	 * @return the latitude
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@Column(name = "parentLocationId", nullable = false)
-	public Long getParentLocationId() {
-		return parentLocationId;
+	@Column(name = "latitude", nullable = false)
+	public String getLatitude() {
+		return latitude;
 	}
 
 	/**
-	 * @param parentLocationId
-	 *            the parentLocationId to set
+	 * @param latitude
+	 *            the latitude to set
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	public void setParentLocationId(Long parentLocationId) {
-		this.parentLocationId = parentLocationId;
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
 	}
 
 	/**
-	 * @return the locationDetails
+	 * @return the longitude
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@OneToOne(cascade = CascadeType.ALL, optional = true)
-	public LocationDetails getLocationDetails() {
-		return locationDetails;
+	@Column(name = "longitude", nullable = false)
+	public String getLongitude() {
+		return longitude;
 	}
 
 	/**
-	 * @param locationDetails
-	 *            the locationDetails to set
+	 * @param longitude
+	 *            the longitude to set
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	public void setLocationDetails(LocationDetails locationDetails) {
-		this.locationDetails = locationDetails;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 	/**
-	 * @return the assn
+	 * @return the associations
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "location", cascade = CascadeType.ALL)
-	public List<LocationCategoryAssn> getAssn() {
-		return assn;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location", cascade = CascadeType.ALL)
+	public List<LocationCategoryAssn> getAssociations() {
+		if (null == this.associations) {
+			this.associations = new ArrayList<LocationCategoryAssn>(1);
+		}
+		return associations;
 	}
 
 	/**
-	 * @param assn
-	 *            the assn to set
+	 * @param associations
+	 *            the associations to set
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	public void setAssn(List<LocationCategoryAssn> assn) {
-		this.assn = assn;
+	public void setAssociations(List<LocationCategoryAssn> associations) {
+		this.associations = associations;
 	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+		return result;
+	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof LocationMaster)) {
+			return false;
+		}
+		LocationMaster other = (LocationMaster) obj;
+		if (locationId == null) {
+			if (other.locationId != null) {
+				return false;
+			}
+		} else if (!locationId.equals(other.locationId)) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LocationMaster [id=" + locationId + " ( " + parentLocationId + " ), area=" + area
+				+ " ( " + code + " ) located at [ " + latitude + ", " + longitude + " ]";
+	}
+
+	
 }

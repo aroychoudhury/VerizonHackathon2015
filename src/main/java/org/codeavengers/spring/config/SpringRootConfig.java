@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 import org.codeavengers.common.dto.entity.Category;
 import org.codeavengers.common.dto.entity.LocationCategoryAssn;
-import org.codeavengers.common.dto.entity.LocationDetails;
 import org.codeavengers.common.dto.entity.LocationMaster;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Initializes the Spring Root context.
@@ -28,8 +28,9 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
  * @author abhishek
  * @since 1.0
  */
-@ComponentScan({ "org.codeavengers" })
 @Configuration
+@EnableTransactionManagement
+@ComponentScan({ "org.codeavengers.main" })
 public class SpringRootConfig {
 	public SpringRootConfig() {
 		System.out.println("Spring Root");
@@ -39,30 +40,30 @@ public class SpringRootConfig {
 	DataSource dataSource;
 
 	@Bean
-	public JdbcTemplate getJdbcTemplate() {
+	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource);
 	}
 
 	@Autowired
 	@Bean(name = "sessionFactory")
-	public SessionFactory getSessionFactory(DataSource dataSource) {
+	public SessionFactory sessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(this.dataSource);
-		sessionBuilder.addProperties(this.getHibernateProperties());
-		sessionBuilder.addAnnotatedClasses(LocationMaster.class, LocationDetails.class, Category.class,
-				LocationCategoryAssn.class);
+		sessionBuilder.addProperties(this.hibernateProperties());
+		sessionBuilder.addAnnotatedClasses(LocationMaster.class, Category.class, LocationCategoryAssn.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 
-	private Properties getHibernateProperties() {
+	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+		properties.put("hibernate.format_sql", "false");
 		return properties;
 	}
 
 	@Autowired
 	@Bean(name = "transactionManager")
-	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 		return transactionManager;
 	}
