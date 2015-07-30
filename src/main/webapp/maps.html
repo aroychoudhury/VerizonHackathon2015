@@ -22,19 +22,23 @@
 		-webkit-box-shadow: 0px 5px 20px #ccc;
 		box-shadow: 0px 5px 20px #ccc;
 	}
+  
+
+
 
   </style>
   
   <script type="text/javascript">
   
+    $(document).ready(function() {
+	
+	function accidentsmap() {
 	var list = [], list1;
 		list1 = {lat:20.385181,lng:72.911453};
 		list.push(list1);
 		list1 = {lat:18.296974,lng:83.896782};
 		list.push(list1);
 	var map;
-		
-    $(document).ready(function() {
 	
       map = new GMaps({
         el: '#map',
@@ -69,7 +73,7 @@
 	                 { label: "Europe", data: 727080000, color: "#DE000F" },
 	                 { label: "North America", data: 344120000, color: "#ED7B00" }    
 	             ];
-				 var options = {
+			var options = {
 		series: {
         pie: {
             show: true,
@@ -77,12 +81,45 @@
         }
     }
 	};
+	}
+	function emptymap(){
+	var map;
+	
+      map = new GMaps({
+        el: '#map',
+        lat: 0,
+        lng: 0,
+		zoom:2
+      });
+	}
+	$('.category').change(function(){
+		var value=$('.category').val();
+		if (value==='Accidents') {
+			$('#map').show();
+			accidentsmap();
+		}
+		else if (value ==='select') {
+			$('#map').show();
+			emptymap();
+		}
+		else if (value ==='Traffic') {
+			$('#map').hide();
+		}
+	});
     });
 	
   </script>
 </head>
 <body>
-	  <div class='dialog' hidden='none'></div>
-      <div id='map'></div>
+<div>
+<label> Choose Category </label> 
+<select class="category">
+  <option value='select'>Select</option>
+  <option value='Traffic'>Traffic</option>
+  <option value="Accidents">Accidents</option>
+ </select>
+</div>
+	  <div class='dialog' style='display: none;'></div>
+      <div id='map' style='display: none;'></div>
 </body>
 </html>
