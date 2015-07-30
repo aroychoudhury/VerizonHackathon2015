@@ -20,4 +20,4 @@ Have a bug or an issue with this theme? [Open a new issue](https://github.com/ar
 
 ## Copyright and License
 
-Copyright 2015 Code Avengers @ VDSI Hackathon. Code released under the [Apache 2.0] https://github.com/aroychoudhury/VerizonHackathon2015/blob/master/LICENSE) license.
+Copyright 2015 Code Avengers @ VDSI Hackathon. Code released under the [Apache 2.0] (https://github.com/aroychoudhury/VerizonHackathon2015/blob/master/LICENSE) license.
