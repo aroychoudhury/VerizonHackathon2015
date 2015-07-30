@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codeavengers.common.dto.DataObject;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,8 +40,8 @@ public class LocationDetails extends DataObject implements Serializable {
 	 */
 	@Id
 	@Column(name = "locationId")
-	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "locationMaster") )
+	//@GeneratedValue(generator = "gen")
+	//@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "locationMaster") )
 	public Long getLocationId() {
 		return locationId;
 	}
@@ -100,8 +101,9 @@ public class LocationDetails extends DataObject implements Serializable {
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@OneToOne(mappedBy = "locationDetails")
-    @PrimaryKeyJoinColumn
+	//@OneToOne(mappedBy = "locationDetails")
+    //@PrimaryKeyJoinColumn
+	@Transient
 	public LocationMaster getLocationMaster() {
 		return locationMaster;
 	}

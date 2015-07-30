@@ -2,6 +2,8 @@
 
 package org.codeavengers.main.data.jpa.impl;
 
+import javax.transaction.Transactional;
+
 import org.codeavengers.common.dto.entity.LocationMaster;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Repository;
  * @see org.codeavengers.main.data.jpa.AbstractJPAPersister
  * @see org.springframework.stereotype.Repository
  */
+@Transactional
 @Repository("LocationPersister")
 public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster> {
     /**
@@ -45,6 +48,7 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
             throw new InvalidDataAccessApiUsageException("LocationMaster cannot be NULL");
         }
         this.getSession().persist(location);
+        System.out.println(location.getLocationId());
         return location;
     }
 

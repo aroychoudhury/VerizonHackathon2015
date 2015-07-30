@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.codeavengers.common.dto.DataObject;
-
 /**
  * This is the JPA Entity for <b>REPORT_ASSOCIATION</b>.
  * 
@@ -27,10 +25,10 @@ import org.codeavengers.common.dto.DataObject;
  */
 @Entity
 @Table(name = "REPORT_ASSOCIATION")
-@SequenceGenerator(name = "assnId", sequenceName = "assnId")
-public class LocationCategoryAssn extends DataObject implements Serializable {
-    private static final long serialVersionUID = 5645480613514678307L;
-    private Long assnId;
+@SequenceGenerator(name = "reportId", sequenceName = "reportId", allocationSize = 1, initialValue = 1)
+public class LocationCategoryAssn implements Serializable {
+	private static final long serialVersionUID = -9215521694003691234L;
+	private Long assnId;
 	private String categoryField;
 	private String categoryValue;
 	private Category category;
@@ -42,8 +40,8 @@ public class LocationCategoryAssn extends DataObject implements Serializable {
 	 * @since 1.0
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "assnId")
-	@Column(name = "assnId", nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reportId")
+	@Column(name = "reportId", nullable = false)
 	public Long getAssnId() {
 		return assnId;
 	}
@@ -103,7 +101,7 @@ public class LocationCategoryAssn extends DataObject implements Serializable {
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId", nullable = false)
 	public Category getCategory() {
 		return category;
@@ -124,7 +122,7 @@ public class LocationCategoryAssn extends DataObject implements Serializable {
 	 * @author abhishek
 	 * @since 1.0
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "locationId", nullable = false)
 	public LocationMaster getLocation() {
 		return location;
@@ -138,5 +136,55 @@ public class LocationCategoryAssn extends DataObject implements Serializable {
 	 */
 	public void setLocation(LocationMaster location) {
 		this.location = location;
+	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((assnId == null) ? 0 : assnId.hashCode());
+		return result;
+	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof LocationCategoryAssn)) {
+			return false;
+		}
+		LocationCategoryAssn other = (LocationCategoryAssn) obj;
+		if (assnId == null) {
+			if (other.assnId != null) {
+				return false;
+			}
+		} else if (!assnId.equals(other.assnId)) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * @author abhishek
+	 * @since 1.0
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LocationCategoryAssn [id=" + assnId + ", value=" + categoryField + " : " + categoryValue + "]";
 	}
 }

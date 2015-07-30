@@ -719,6 +719,10 @@ section#contact .text-danger {
 footer {
     padding: 25px 0;
     text-align: center;
+    background-color: #222;
+    background-image: url(../img/map-image.png);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 footer span.copyright {
@@ -726,6 +730,7 @@ footer span.copyright {
     text-transform: none;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 40px;
+    color: #fff;
 }
 
 footer ul.quicklinks {

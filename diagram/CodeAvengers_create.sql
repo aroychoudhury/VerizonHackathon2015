@@ -31,27 +31,24 @@ CREATE SEQUENCE locationId
 ;
 
 
--- Sequence: reportId
--- 
 
 
-CREATE SEQUENCE reportId
-      INCREMENT BY 1
-      NO MINVALUE
-      NO MAXVALUE
-      START WITH 1
-      NO CYCLE
-;
 
+-- tables
+-- Table: LOCATION_DETAILS
+CREATE TABLE LOCATION_DETAILS (
+    latitude varchar(20)  NOT NULL,
+    longitude varchar(20)  NOT NULL,
+    locationId int  NOT NULL,
+   CONSTRAINT LOCATION_DETAILS_pk PRIMARY KEY (locationId)
+);
 
 -- Table: LOCATION_MASTER
 CREATE TABLE LOCATION_MASTER (
     locationId int  NOT NULL,
-    parentLocationId int  NOT NULL,
     area varchar(50)  NOT NULL,
     code varchar(10)  NOT NULL,
-    latitude varchar(20)  NOT NULL,
-    longitude varchar(20)  NOT NULL,
+    parentLocationId int  NOT NULL,
    CONSTRAINT LOCATION_MASTER_pk PRIMARY KEY (locationId)
 );
 
@@ -71,7 +68,7 @@ CREATE TABLE REPORT_ASSOCIATION (
 
 -- Table: REPORT_CATEGORY
 CREATE TABLE REPORT_CATEGORY (
-    reportCategory varchar(100)  NOT NULL,
+    reportCategory varchar(20)  NOT NULL,
     categoryId int  NOT NULL,
    CONSTRAINT REPORT_CATEGORY_pk PRIMARY KEY (categoryId)
 );
@@ -81,6 +78,21 @@ CREATE TABLE REPORT_CATEGORY (
 
 
 -- foreign keys
+-- Reference:  LOCATION_DETAILS_LOCATION_MASTER (table: LOCATION_DETAILS)
+
+
+ALTER TABLE LOCATION_DETAILS ADD CONSTRAINT LOCATION_DETAILS_LOCATION_MASTER 
+    FOREIGN KEY (locationId)
+    REFERENCES LOCATION_MASTER (locationId)
+;
+
+-- Reference:  LOCATION_MASTER_LOCATION_MASTER (table: LOCATION_MASTER)
+
+
+ALTER TABLE LOCATION_MASTER ADD CONSTRAINT LOCATION_MASTER_LOCATION_MASTER 
+    FOREIGN KEY (parentLocationId)
+    REFERENCES LOCATION_MASTER (locationId)
+;
 
 -- Reference:  REPORT_ASSOCIATION_LOCATION_MASTER (table: REPORT_ASSOCIATION)
 
