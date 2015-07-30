@@ -34,8 +34,8 @@
   <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css"> 
-	
-	#map{
+	#map
+	{
 		display: block;
 		width: 95%;
 		height: 600px;
@@ -44,105 +44,91 @@
 		-webkit-box-shadow: 0px 5px 20px #ccc;
 		box-shadow: 0px 5px 20px #ccc;
 	}
-  
-
-
-
+	.ui-dialog
+	{
+		z-index: 1060;
+	}
   </style>
   
   <script type="text/javascript">
   
-    $(document).ready(function() {
+    $(document).ready(function(){
 	
-	function accidentsmap() {
-	var list = [], list1;
-		list1 = {lat:20.385181,lng:72.911453};
-		list.push(list1);
-		list1 = {lat:18.296974,lng:83.896782};
-		list.push(list1);
-	var map;
-	
-      map = new GMaps({
-        el: '#map',
-        lat: 0,
-        lng: 0,
-		zoom: 2
-      });
-	  
-	  for (var i=0;i<list.length;i++) {
-		var item=list[i];
-		  map.addMarker({
-		  lat: item["lat"],
-		  lng: item["lng"],
-		  click: function() {
-			$('.dialog').dialog({
-				title: 'Details',
-				minWidth: 400,
-				modal:true,
-                minHeight: 400,
-				open:function (){
-					var data = $.plot($(".dialog"), dataSet, options);
-							   $('.dialog').val(data);
+		function accidentsmap(){
+			var list = [], list1,map;
+				list1 = {lat:20.385181,lng:72.911453};
+				list.push(list1);
+				list1 = {lat:18.296974,lng:83.896782};
+				list.push(list1);
+			    map = new GMaps({
+			        el: '#map',
+			        lat: 0,
+			        lng: 0,
+					zoom: 2
+			      });
+			  for (var i=0;i<list.length;i++) {
+				var item=list[i];
+				  map.addMarker({
+				  lat: item["lat"],
+				  lng: item["lng"],
+				  click: function() {
+					$('.dialog').dialog({
+						title: 'Details',
+						minWidth: 400,
+						modal:true,
+		                minHeight: 400,
+						open: function() {
+							var data = $.plot($(".dialog"), dataSet, options);
+									   $('.dialog').val(data);
+						}
+					});
+				  }
+				});
+			  }
+			  var dataSet = [
+			                 {label: "Asia", data: 4119630000, color: "#005CDE" },
+			                 { label: "Latin America", data: 590950000, color: "#00A36A" },
+			                 { label: "Africa", data: 1012960000, color: "#7D0096" },
+			                 { label: "Oceania", data: 35100000, color: "#992B00" },
+			                 { label: "Europe", data: 727080000, color: "#DE000F" },
+			                 { label: "North America", data: 344120000, color: "#ED7B00" }    
+			             ];
+			   var options = {
+				   series: {
+		        			pie: {
+		        				  show: true,
+			   					  tilt: 0.5
+		        			}
+		    		}
+				};
+		}
+		function emptymap(){
+			var map = new GMaps({
+		        el: '#map',
+		        lat: 0,
+		        lng: 0,
+				zoom: 2
+		      });
+		}
+		$('.category').change(function(){
+			var value=$('.category').val();
+			if (value==='Accidents') {
+				$('#map').show();
+				accidentsmap();
 			}
-			});
-		  }
+			else if (value ==='select') {
+				$('#map').show();
+				emptymap();
+			}
 		});
-	  }
-	  var dataSet = [
-	                 {label: "Asia", data: 4119630000, color: "#005CDE" },
-	                 { label: "Latin America", data: 590950000, color: "#00A36A" },
-	                 { label: "Africa", data: 1012960000, color: "#7D0096" },
-	                 { label: "Oceania", data: 35100000, color: "#992B00" },
-	                 { label: "Europe", data: 727080000, color: "#DE000F" },
-	                 { label: "North America", data: 344120000, color: "#ED7B00" }    
-	             ];
-			var options = {
-		series: {
-        pie: {
-            show: true,
-            tilt: 0.5
-        }
-    }
-	};
-	}
-	function emptymap(){
-	var map;
-	
-      map = new GMaps({
-        el: '#map',
-        lat: 0,
-        lng: 0,
-		zoom: 2
-      });
-	}
-	$('.category').change(function(){
-		var value=$('.category').val();
-		if (value==='Accidents') {
-			$('#map').show();
-			accidentsmap();
-		}
-		else if (value ==='select') {
-			$('#map').show();
-			emptymap();
-		}
-	});
-	$('#maps').click(function(){
-		
-		$('#toggle').toggle();
-		$('.category').val('select');
-		$('#map').hide();
-	});
+		$('#maps').on('click',function(){
+			$('#toggle').toggle();
+			$('.category').val('select');
+			$('#map').hide();
+		});
     });
 	
   </script>
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="resources/js/html5shiv.js"></script>
-        <script src="resources/js/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body id="page-top" class="index">
@@ -194,28 +180,20 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#" id='maps' class="portfolio-link" data-toggle="modal">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal" data-keyboard="false">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
-                        </div> <img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                    </a>
+                        </div> 
+                        <img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">
+                     </a>
                     <div class="portfolio-caption">
                         <h4>Round Icons</h4>
                         <p class="text-muted">Graphic Design</p>
                     </div>
                 </div>
-                <div id='toggle' style='display:none'>
-<label> Choose Category </label> 
-<select class="category">
-  <option value='select'>Select</option>
-  <option value="Accidents">Accidents</option>
- </select>
-<div class='dialog' style='display: none;'></div>
-<div id='map' style='display: none;'></div>
-</div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
+              <div class="col-md-4 col-sm-6 portfolio-item">
                     <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
@@ -441,29 +419,21 @@
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
                             <h2>Project Name</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="resources/img/portfolio/roundicons-free.png" alt="">
-                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
-                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                            <p>
-                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a
-                                    href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a
-                                    href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.
-                            </p>
-                            <ul class="list-inline">
-                                <li>Date: July 2014</li>
-                                <li>Client: Round Icons</li>
-                                <li>Category: Graphic Design</li>
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                <i class="fa fa-times"></i> Close Project
-                            </button>
+                            <br/>
+                            <label> Choose Category </label> 
+					<select class="category">
+  						<option value='select'>Select</option>
+  						<option value="Accidents">Accidents</option>
+ 					</select>
+				
+				<div id='map' style='display: none;'></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+	<div class='dialog' style='display: none;'></div>
 
     <!-- Portfolio Modal 2 -->
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
