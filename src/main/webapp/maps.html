@@ -5,10 +5,12 @@
   <title>Google Maps</title>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
   <script type="text/javascript" src="resources/js/gmaps.js"></script> 
   <script type="text/javascript" src="resources/js/jquery.flot.js"></script>
   <script type="text/javascript" src="resources/js/jquery.flot.pie.js"></script>
   <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css"> 
 	
 	#map{
@@ -20,7 +22,7 @@
 		-webkit-box-shadow: 0px 5px 20px #ccc;
 		box-shadow: 0px 5px 20px #ccc;
 	}
-  
+
   </style>
   
   <script type="text/javascript">
@@ -30,7 +32,7 @@
 		list.push(list1);
 		list1 = {lat:18.296974,lng:83.896782};
 		list.push(list1);
- var map;
+	var map;
 		
     $(document).ready(function() {
 	
@@ -48,13 +50,12 @@
 		  lng: item["lng"],
 		  click: function() {
 			$('.dialog').dialog({
-				title: "Note",
-				modal: true,
-				width:'auto',
-				height:'auto',
+				title: 'Details',
+				minWidth: 400,
+                minHeight: 400,
 				open:function (){
-				var data = $.plot($(".dialog"), dataSet, options);
-				$('.dialog').val(data);
+					var data = $.plot($(".dialog"), dataSet, options);
+							   $('.dialog').val(data);
 			}
 			});
 		  }
@@ -69,13 +70,13 @@
 	                 { label: "North America", data: 344120000, color: "#ED7B00" }    
 	             ];
 				 var options = {
-    series: {
+		series: {
         pie: {
             show: true,
             tilt: 0.5
         }
     }
-};
+	};
     });
 	
   </script>
