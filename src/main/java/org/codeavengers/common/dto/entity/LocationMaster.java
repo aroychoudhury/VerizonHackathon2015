@@ -3,6 +3,7 @@
  */
 package org.codeavengers.common.dto.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codeavengers.common.dto.DataObject;
+
 /**
  * This is the JPA Entity for <b>LOCATION_MASTER</b>.
  * 
@@ -26,8 +29,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LOCATION_MASTER")
 @SequenceGenerator(name = "locationId", sequenceName = "locationId")
-public class LocationMaster {
-	private Long locationId;
+public class LocationMaster extends DataObject implements Serializable {
+    private static final long serialVersionUID = -6580838413207923482L;
+    private Long locationId;
 	private String area;
 	private String code;
 	private Long parentLocationId;

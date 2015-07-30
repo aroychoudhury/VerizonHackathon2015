@@ -3,6 +3,7 @@
  */
 package org.codeavengers.common.dto.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codeavengers.common.dto.DataObject;
+
 /**
  * This is the JPA Entity for <b>REPORT_CATEGORY</b>.
  * 
@@ -23,8 +26,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "REPORT_CATEGORY")
 @SequenceGenerator(name = "reportId", sequenceName = "reportId")
-public class Category {
-	private Long categoryId;
+public class Category extends DataObject implements Serializable {
+    private static final long serialVersionUID = 752861092185673487L;
+    private Long categoryId;
 	private String reportCategory;
 	private List<LocationCategoryAssn> assn;
 

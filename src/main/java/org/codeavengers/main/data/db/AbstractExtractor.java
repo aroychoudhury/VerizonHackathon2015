@@ -5,7 +5,6 @@ package org.codeavengers.main.data.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.codeavengers.common.exception.DataLayerFailureException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -26,5 +25,5 @@ public abstract class AbstractExtractor<T> implements ResultSetExtractor<T> {
         return this.extractDataInternal(resultSet);
     }
 
-    protected abstract T extractDataInternal(ResultSet resultSet) throws DataLayerFailureException;
+    protected abstract T extractDataInternal(ResultSet resultSet);
 }

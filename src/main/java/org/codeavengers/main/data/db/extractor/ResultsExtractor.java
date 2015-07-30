@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.codeavengers.common.dto.impl.Result;
 import org.codeavengers.common.dto.impl.Results;
-import org.codeavengers.common.exception.DataLayerFailureException;
 import org.codeavengers.main.data.db.AbstractExtractor;
+import org.springframework.dao.DataRetrievalFailureException;
 
 /**
  * TODO
@@ -27,7 +27,7 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
      * @see org.springframework.jdbc.core.ResultSetExtractor#extractData(java.sql.ResultSet)
      */
     @Override
-    public Results extractDataInternal(ResultSet resultSet) throws DataLayerFailureException {
+    public Results extractDataInternal(ResultSet resultSet) {
         Results results = new Results();
 
         if (null == resultSet) {
@@ -64,7 +64,7 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
                 results.setEntries(entries);
             }
         } catch (SQLException e) {
-            throw new DataLayerFailureException(e);
+            throw new DataRetrievalFailureException("ResultSet parsing failed", e);
         }
 
         return results;
@@ -113,7 +113,7 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
             case Types.BOOLEAN:
                 return "BOOLEAN";
             default:
-                throw new DataLayerFailureException("Unsupported Data Type Exception");
+                throw new UnsupportedOperationException("Unsupported Data Type Exception");
         }
     }
 

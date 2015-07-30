@@ -2,11 +2,8 @@
 
 package org.codeavengers.main.data.db.impl;
 
-import java.io.Serializable;
-
 import org.codeavengers.common.dto.DataObject;
-import org.codeavengers.common.exception.DataLayerFailureException;
-import org.codeavengers.main.data.AbstractReadOnlyPersister;
+import org.codeavengers.main.data.db.AbstractPersister;
 import org.codeavengers.main.data.db.extractor.ResultsExtractor;
 import org.springframework.stereotype.Repository;
 
@@ -15,17 +12,21 @@ import org.springframework.stereotype.Repository;
  * 
  * @author abhishek
  * @since 1.0
+ * @see org.codeavengers.main.data.db.AbstractPersister
+ * @see org.springframework.stereotype.Repository
  */
 @Repository("GenericReadOnlyPersister")
-public class GenericReadOnlyPersister extends AbstractReadOnlyPersister {
+public class GenericReadOnlyPersister extends AbstractPersister {
     /**
+     * 
      * @author abhishek
      * @since 1.0
-     * @see org.codeavengers.main.data.Persister#retrieve(java.lang.Object)
      */
-    @Override
-    public DataObject retrieve(Serializable id) throws DataLayerFailureException {
-        return this.test("SELECT * FROM users", new ResultsExtractor());
+    public DataObject query(String query) {
+        if (null == query) {
+            
+        }
+        return this.executeQuery("SELECT * FROM users", new ResultsExtractor());
     }
 
     /**
@@ -34,7 +35,7 @@ public class GenericReadOnlyPersister extends AbstractReadOnlyPersister {
      * @see org.codeavengers.main.data.Persister#identify()
      */
     @Override
-    public String identify() throws DataLayerFailureException {
+    public String identify() {
         return GenericReadOnlyPersister.class.getSimpleName();
     }
 }

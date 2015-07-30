@@ -3,6 +3,8 @@
  */
 package org.codeavengers.common.dto.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.codeavengers.common.dto.DataObject;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -22,8 +25,9 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "LOCATION_DETAILS")
-public class LocationDetails {
-	private Long locationId;
+public class LocationDetails extends DataObject implements Serializable {
+    private static final long serialVersionUID = 2598211405698541998L;
+    private Long locationId;
 	private String latitude;
 	private String longitude;
 	private LocationMaster locationMaster;
