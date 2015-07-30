@@ -20,7 +20,7 @@ public interface JPAPersister<K, V> extends Persister {
      * @author abhishek
      * @since 1.0
      */
-    boolean add(V v);
+    V add(V v);
 
     /**
      * Updates the element to the Data Store.
@@ -32,7 +32,7 @@ public interface JPAPersister<K, V> extends Persister {
      * @author abhishek
      * @since 1.0
      */
-    boolean update(V v);
+    V update(V v);
 
     /**
      * Deletes the requested data from the data store using the id.
@@ -45,7 +45,7 @@ public interface JPAPersister<K, V> extends Persister {
      * @author abhishek
      * @since 1.0
      */
-    boolean delete(K id);
+    V delete(K id);
 
     /**
      * Retrieves the requested data from the data store in question. The id is

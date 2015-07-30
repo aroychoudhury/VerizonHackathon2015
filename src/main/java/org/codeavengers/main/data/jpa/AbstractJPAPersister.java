@@ -2,6 +2,7 @@
 
 package org.codeavengers.main.data.jpa;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,5 +28,19 @@ public abstract class AbstractJPAPersister<K, V> implements JPAPersister<K, V> {
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * This method is used to access the current session within a transaction.
+     * If no session is existent for that transaction, a new
+     * {@link org.hibernate.Session} is returned.
+     * 
+     * @return An instance of the Hibernate session
+     * @author abhishek
+     * @since 1.0
+     * @see org.hibernate.Session
+     */
+    public Session getSession() {
+        return this.sessionFactory.getCurrentSession();
     }
 }
