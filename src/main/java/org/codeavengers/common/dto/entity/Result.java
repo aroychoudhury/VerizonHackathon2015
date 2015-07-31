@@ -2,12 +2,12 @@
 
 package org.codeavengers.common.dto.entity;
 
-import java.sql.ResultSet;
-
 import org.codeavengers.common.dto.DBEntity;
 
 /**
- * This is a wrapper for values/data in a simple {@link ResultSet} data row.
+ * This class is a wrapper for data in a simple {@link java.sql.ResultSet} table
+ * row. This class however does not wrap any of the column information
+ * associated with these values.
  * 
  * @author abhishek
  * @since 1.0
@@ -15,18 +15,13 @@ import org.codeavengers.common.dto.DBEntity;
  * @see java.sql.ResultSet
  */
 public class Result implements DBEntity {
-    private static final long serialVersionUID = 8960783086955058347L;
-
-    /**
-     * Contains the value as per the data row.
-     * 
-     * @since 1.0
-     * @see String[]
-     */
+    private static final long serialVersionUID = -4836894188003928870L;
     private String[]          values           = null;
 
     /**
-     * Initializes the fields with expected values.
+     * Initializes the fields with expected values. This is done to combat any
+     * {@link java.lang.NullPointerException} that might occur during an
+     * operation on this bean.
      * 
      * @author abhishek
      * @since 1.0
@@ -37,7 +32,9 @@ public class Result implements DBEntity {
     }
 
     /**
-     * Overridden constructor to default initialize the properties.
+     * Overridden constructor to default initialize the properties. This is done
+     * to combat any {@link java.lang.NullPointerException} that might occur
+     * during an operation on this bean.
      * 
      * @param values
      * @author abhishek
@@ -51,7 +48,7 @@ public class Result implements DBEntity {
     /**
      * @return the values
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public String[] getValues() {
         return this.values;
@@ -61,7 +58,7 @@ public class Result implements DBEntity {
      * @param values
      *            the values to set
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public void setValues(String[] values) {
         if (null == values)
@@ -71,7 +68,7 @@ public class Result implements DBEntity {
 
     /**
      * @author abhishek
-     * @since  1.0
+     * @since 1.0
      * @see java.lang.Object#toString()
      */
     @Override

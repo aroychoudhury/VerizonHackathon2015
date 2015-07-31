@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
  * @see org.codeavengers.common.dto.entity.Category
  * @see org.codeavengers.main.data.jpa.AbstractJPAPersister
  * @see org.springframework.stereotype.Repository
+ * @see javax.transaction.Transactional
  */
 @Transactional
 @Repository("CategoryPersister")

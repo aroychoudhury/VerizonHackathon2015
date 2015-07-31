@@ -14,11 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * @author abhishek
  * @since 1.0
+ * @see org.springframework.web.bind.annotation.RestController
  */
 @RestController
 public class PingController extends BaseController {
+    /**
+     * This method is invoked for the URL ending <b>ping-default</b> for a HTTP
+     * GET Request. This method is used to check that the server is responding
+     * as expected.
+     * 
+     * @return Returns a {@link org.springframework.http.ResponseEntity} which
+     *         encapsulates a String message
+     * @author abhishek
+     * @since 1.0
+     * @see org.springframework.web.bind.annotation.RequestMapping
+     * @see org.springframework.web.bind.annotation.RequestMethod
+     * @see org.springframework.http.ResponseEntity
+     */
     @RequestMapping(value = "/ping-default", method = RequestMethod.GET)
     public ResponseEntity<String> pingDefault() {
-        return new ResponseEntity<String>("Hello World", HttpStatus.OK);
+        return new ResponseEntity<String>("Ping success", HttpStatus.OK);
     }
 }

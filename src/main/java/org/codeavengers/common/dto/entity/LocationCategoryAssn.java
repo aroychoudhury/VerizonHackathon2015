@@ -17,9 +17,6 @@ import javax.persistence.Table;
 
 import org.codeavengers.common.dto.DBEntity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 /**
  * This is the JPA DBEntity for <b>REPORT_ASSOCIATION</b>.
  * 
@@ -29,7 +26,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "REPORT_ASSOCIATION")
 @SequenceGenerator(name = "reportId", sequenceName = "reportId", allocationSize = 1, initialValue = 1)
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class LocationCategoryAssn implements DBEntity {
     private static final long serialVersionUID = -9215521694003691234L;
     private Long           assnId;

@@ -16,7 +16,21 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * TODO
+ * This class wraps the {@link org.codeavengers.common.dto.entity.Category}
+ * database entity.
+ * 
+ * The {@link org.codeavengers.common.dto.Rest} interface that it implements
+ * indicates that this class participates in REST End-point operations.
+ * 
+ * Further the {@link com.fasterxml.jackson.annotation.JsonInclude} annotation
+ * indicates that the generated JSON will not contain any <i>Empty</i> (e.g.
+ * {@link java.util.List}) or <i>Null</i> data.
+ * 
+ * The {@link com.fasterxml.jackson.annotation.JsonIdentityInfo} is added to
+ * prevent against recursive object tree.
+ * 
+ * This class also defines utility methods to convert between the REST-side
+ * implementations and the DB-side ones.
  * 
  * @author abhishek
  * @since 1.0
@@ -26,7 +40,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonInclude(Include.NON_EMPTY)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class CategoryWrapper extends Category implements Rest {
-    private static final long serialVersionUID = 6665582077591986873L;
+    private static final long serialVersionUID = -138260273061832039L;
     private List<LocationWrapper> locns  = null;
     private Long                  assnId = null;
     private String                unit   = null;
@@ -108,6 +122,19 @@ public class CategoryWrapper extends Category implements Rest {
         this.value = value;
     }
 
+    /**
+     * This method is used as an utility to convert the DB-side entities to
+     * wrapper REST implementations; it however does not convert any
+     * relationships defined and hence named <i>liteConvert</i>.
+     * 
+     * @param category
+     *            {@link org.codeavengers.common.dto.entity.Category} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.wrap.CategoryWrapper}
+     * @author abhishek
+     * @since 1.0
+     */
     public static CategoryWrapper liteConvert(Category category) {
         CategoryWrapper wrapper = new CategoryWrapper();
         if (null == category) {
@@ -119,6 +146,19 @@ public class CategoryWrapper extends Category implements Rest {
         return wrapper;
     }
 
+    /**
+     * This method is used as an utility to revert the REST implementation to
+     * the DB-side entity; it however does not convert any relationships defined
+     * and hence named <i>liteRevert</i>.
+     * 
+     * @param wrapper
+     *            {@link org.codeavengers.common.dto.wrap.CategoryWrapper} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.entity.Category}
+     * @author abhishek
+     * @since 1.0
+     */
     public static Category liteRevert(CategoryWrapper wrapper) {
         Category category = new Category();
         if (null == wrapper) {
@@ -129,6 +169,19 @@ public class CategoryWrapper extends Category implements Rest {
         return category;
     }
 
+    /**
+     * Same as
+     * {@link org.codeavengers.common.dto.wrap.CategoryWrapper#liteConvert}; it
+     * converts all relationships defined and hence named <i>deepConvert</i>.
+     * 
+     * @param category
+     *            {@link org.codeavengers.common.dto.entity.Category} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.wrap.CategoryWrapper}
+     * @author abhishek
+     * @since 1.0
+     */
     public static CategoryWrapper deepConvert(Category category) {
         CategoryWrapper wrapper = CategoryWrapper.liteConvert(category);
 
@@ -148,6 +201,19 @@ public class CategoryWrapper extends Category implements Rest {
         return wrapper;
     }
 
+    /**
+     * Same as
+     * {@link org.codeavengers.common.dto.wrap.CategoryWrapper#liteRevert}; it
+     * converts all relationships defined and hence named <i>deepRevert</i>.
+     * 
+     * @param wrapper
+     *            {@link org.codeavengers.common.dto.wrap.CategoryWrapper} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.entity.Category}
+     * @author abhishek
+     * @since 1.0
+     */
     public static Category deepRevert(CategoryWrapper wrapper) {
         Category category = CategoryWrapper.liteRevert(wrapper);
 
@@ -172,4 +238,15 @@ public class CategoryWrapper extends Category implements Rest {
         }
         return category;
     }
+
+    /**
+     * @author abhishek
+     * @since 1.0
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "CategoryWrapper [category=" + this.getCatDesc() + " (" + this.getCatId() + "), " + ", value=" + value + " " + unit + "]";
+    }
+
 }

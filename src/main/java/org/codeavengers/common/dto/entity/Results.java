@@ -8,57 +8,33 @@ import java.util.List;
 import org.codeavengers.common.dto.DBEntity;
 
 /**
- * This is a wrapper for a list of {@link Result} object.
+ * This is a wrapper for a {@link java.util.List} of
+ * {@link org.codeavengers.common.dto.entity.Result} object.
  * 
- * Each of the {@link Result} does not need to contain the name and type
- * information for the columns, instead it will only wrap the data.
+ * Each of the {@link org.codeavengers.common.dto.entity.Result} does not need
+ * to contain the name and type information for the columns, instead it will
+ * only wrap the data. This class provides context to the data by storing name
+ * and type information for the columns.
+ * 
+ * The {@link org.codeavengers.common.dto.DBEntity} interface that it implements
+ * indicates that this class participates in Data Access Layer operations.
  * 
  * @author abhishek
  * @since 1.0
  * @see org.codeavengers.common.dto.entity.Result
  * @see org.codeavengers.common.dto.DBEntity
- * @see java.util.List
  */
 public class Results implements DBEntity {
-    private static final long serialVersionUID = -1679135433372626950L;
+    private static final long serialVersionUID = 3894034420524234239L;
+    private List<Result> entries  = null;
+    private String[]     sortedBy = null;
+    private String[]     names    = null;
+    private String[]     types    = null;
 
     /**
-     * Contains a list of {@link Result}.
-     * 
-     * @since 1.0
-     * @see List<ResultEntry>
-     */
-    private List<Result>      entries          = null;
-
-    /**
-     * Indicates the sorted by columns. Sort can be on multiple fields hence
-     * this is in array.
-     * 
-     * @since 1.0
-     * @see String
-     */
-    private String[]          sortedBy         = null;
-
-    /**
-     * Contains the code/name for the value, as per the same index as
-     * <i>entries.get(index).getValues()</i>.
-     * 
-     * @since 1.0
-     * @see String[]
-     */
-    private String[]          names            = null;
-
-    /**
-     * Contains the data type of the value, as per the same index as
-     * <i>entries.get(index).getValues()</i>.
-     * 
-     * @since 1.0
-     * @see String[]
-     */
-    private String[]          types            = null;
-
-    /**
-     * Initializes the fields with expected values.
+     * Initializes the fields with expected values. This is done to combat any
+     * {@link java.lang.NullPointerException} that might occur during an
+     * operation on this bean.
      * 
      * @author abhishek
      * @since 1.0
@@ -73,7 +49,8 @@ public class Results implements DBEntity {
     /**
      * @return the entries
      * @since 1.0
-     * @see List<Result>
+     * @see java.util.List
+     * @see org.codeavengers.common.dto.entity.Result
      */
     public List<Result> getEntries() {
         return this.entries;
@@ -83,7 +60,8 @@ public class Results implements DBEntity {
      * @param entries
      *            the entries to set
      * @since 1.0
-     * @see List<Result>
+     * @see java.util.List
+     * @see org.codeavengers.common.dto.entity.Result
      */
     public void setEntries(List<Result> entries) {
         if (null == entries)
@@ -92,9 +70,12 @@ public class Results implements DBEntity {
     }
 
     /**
-     * @return the sortedBy
+     * Gives the sorted by columns. The array return type supports multiple sort
+     * fields.
+     * 
+     * @return the array of sorted by column names
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public String[] getSortedBy() {
         return this.sortedBy;
@@ -104,7 +85,7 @@ public class Results implements DBEntity {
      * @param sortedBy
      *            the sortedBy to set
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public void setSortedBy(String[] sortedBy) {
         if (null == sortedBy)
@@ -113,9 +94,13 @@ public class Results implements DBEntity {
     }
 
     /**
+     * Contains the name for the value, as per the same index as
+     * <i>entries.get(index).getValues()</i>. This is usually the column name of
+     * the data.
+     * 
      * @return the names
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public String[] getNames() {
         return this.names;
@@ -125,7 +110,7 @@ public class Results implements DBEntity {
      * @param names
      *            the names to set
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public void setNames(String[] names) {
         if (null == names)
@@ -134,9 +119,13 @@ public class Results implements DBEntity {
     }
 
     /**
+     * Contains the data type of the value, as per the same index as
+     * <i>entries.get(index).getValues()</i>. The type here indicates the
+     * database column datatype.
+     * 
      * @return the types
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public String[] getTypes() {
         return this.types;
@@ -146,7 +135,7 @@ public class Results implements DBEntity {
      * @param types
      *            the types to set
      * @since 1.0
-     * @see String[]
+     * @see java.lang.String
      */
     public void setTypes(String[] types) {
         if (null == types)
@@ -156,7 +145,7 @@ public class Results implements DBEntity {
 
     /**
      * @author abhishek
-     * @since  1.0
+     * @since 1.0
      * @see java.lang.Object#toString()
      */
     @Override

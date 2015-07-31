@@ -23,7 +23,7 @@ public abstract class AbstractJPAPersister<K, V> implements JPAPersister<K, V> {
      * @param sessionFactory
      *            the sessionFactory to set
      * @since 1.0
-     * @see SessionFactory
+     * @see org.hibernate.SessionFactory
      */
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {

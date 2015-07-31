@@ -16,10 +16,26 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * TODO
+ * This class wraps the
+ * {@link org.codeavengers.common.dto.entity.LocationMaster} database entity.
+ * 
+ * The {@link org.codeavengers.common.dto.Rest} interface that it implements
+ * indicates that this class participates in REST End-point operations.
+ * 
+ * Further the {@link com.fasterxml.jackson.annotation.JsonInclude} annotation
+ * indicates that the generated JSON will not contain any <i>Empty</i> (e.g.
+ * {@link java.util.List}) or <i>Null</i> data.
+ * 
+ * The {@link com.fasterxml.jackson.annotation.JsonIdentityInfo} is added to
+ * prevent against recursive object tree.
+ * 
+ * This class also defines utility methods to convert between the REST-side
+ * implementations and the DB-side ones.
  * 
  * @author abhishek
  * @since 1.0
+ * @see org.codeavengers.common.dto.Rest
+ * @see org.codeavengers.common.dto.entity.LocationMaster
  */
 @JsonInclude(Include.NON_EMPTY)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
@@ -106,6 +122,19 @@ public class LocationWrapper extends LocationMaster implements Rest {
         this.value = value;
     }
 
+    /**
+     * This method is used as an utility to convert the DB-side entities to
+     * wrapper REST implementations; it however does not convert any
+     * relationships defined and hence named <i>liteConvert</i>.
+     * 
+     * @param category
+     *            {@link org.codeavengers.common.dto.entity.LocationMaster} to
+     *            be converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.wrap.LocationWrapper}
+     * @author abhishek
+     * @since 1.0
+     */
     public static LocationWrapper liteConvert(LocationMaster location) {
         LocationWrapper wrapper = new LocationWrapper();
         if (null == location) {
@@ -120,6 +149,19 @@ public class LocationWrapper extends LocationMaster implements Rest {
         return wrapper;
     }
 
+    /**
+     * This method is used as an utility to revert the REST implementation to
+     * the DB-side entity; it however does not convert any relationships defined
+     * and hence named <i>liteRevert</i>.
+     * 
+     * @param wrapper
+     *            {@link org.codeavengers.common.dto.wrap.LocationWrapper} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.entity.LocationMaster}
+     * @author abhishek
+     * @since 1.0
+     */
     public static LocationMaster liteRevert(LocationWrapper wrapper) {
         LocationMaster location = new LocationMaster();
         if (null == wrapper) {
@@ -133,6 +175,19 @@ public class LocationWrapper extends LocationMaster implements Rest {
         return location;
     }
 
+    /**
+     * Same as
+     * {@link org.codeavengers.common.dto.wrap.LocationWrapper#liteConvert}; it
+     * converts all relationships defined and hence named <i>deepConvert</i>.
+     * 
+     * @param category
+     *            {@link org.codeavengers.common.dto.entity.LocationMaster} to
+     *            be converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.wrap.LocationWrapper}
+     * @author abhishek
+     * @since 1.0
+     */
     public static LocationWrapper deepConvert(LocationMaster location) {
         LocationWrapper wrapper = LocationWrapper.liteConvert(location);
 
@@ -152,6 +207,19 @@ public class LocationWrapper extends LocationMaster implements Rest {
         return wrapper;
     }
 
+    /**
+     * Same as
+     * {@link org.codeavengers.common.dto.wrap.LocationWrapper#liteRevert}; it
+     * converts all relationships defined and hence named <i>deepRevert</i>.
+     * 
+     * @param wrapper
+     *            {@link org.codeavengers.common.dto.wrap.LocationWrapper} to be
+     *            converted
+     * @return an instance of the
+     *         {@link org.codeavengers.common.dto.entity.LocationMaster}
+     * @author abhishek
+     * @since 1.0
+     */
     public static LocationMaster deepRevert(LocationWrapper wrapper) {
         LocationMaster location = LocationWrapper.liteRevert(wrapper);
 

@@ -15,10 +15,19 @@ import org.codeavengers.main.data.db.AbstractExtractor;
 import org.springframework.dao.DataRetrievalFailureException;
 
 /**
- * TODO
+ * This is a generic implementation of
+ * {@link org.springframework.jdbc.core.ResultSetExtractor} which allows
+ * capturing any database query output in generic java beans.
+ * 
+ * A combination of the {@link org.codeavengers.common.dto.entity.Result} and
+ * {@link org.codeavengers.common.dto.entity.Results} entities are leveraged to
+ * achieve a generic mapping.
  * 
  * @author abhishek
  * @since 1.0
+ * @see org.springframework.jdbc.core.ResultSetExtractor
+ * @see org.codeavengers.common.dto.entity.Result
+ * @see org.codeavengers.common.dto.entity.Results
  */
 public class ResultsExtractor extends AbstractExtractor<Results> {
     /**
@@ -70,6 +79,17 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
         return results;
     }
 
+    /**
+     * Resolves the Database data-type information and returns a understandable
+     * String.
+     * 
+     * @param dbType
+     *            database column data-type as defined by {@link java.sql.Types}
+     * @return string column name to be displayed on the GUI
+     * @author abhishek
+     * @since 1.0
+     * @see java.sql.Types
+     */
     private String resolveType(int dbType) {
         switch (dbType) {
             case Types.NUMERIC:
@@ -117,6 +137,19 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
         }
     }
 
+    /**
+     * @param resultSet
+     *            {@link java.sql.ResultSet} to be parsed
+     * @param dbType
+     *            database column data-type as defined by {@link java.sql.Types}
+     * @param colnIndex
+     *            the column index
+     * @return string value to be displayed on the GUI
+     * @throws SQLException
+     * @author abhishek
+     * @since 1.0
+     * @see java.sql.ResultSet
+     */
     private String resolveObject(ResultSet resultSet, int dbType, int colnIndex) throws SQLException {
         String resolvedValue = null;
         switch (dbType) {
