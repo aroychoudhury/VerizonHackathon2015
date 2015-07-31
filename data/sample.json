@@ -1,0 +1,26 @@
+{
+  "@id": 1,
+  "locationId": 1,
+  "parentLocationId": 1,
+  "area": "Hyderabad",
+  "code": "HYD",
+  "latitude": "20.385181",
+  "longitude": "72.911453",
+  "associations": [
+    {
+      "@id": 2,
+      "assnId": 1,
+      "categoryField": "No. of Persons",
+      "categoryValue": "20890",
+      "category": {
+        "@id": 3,
+        "categoryId": 1,
+        "reportCategory": "Accident",
+        "associations": [
+          2
+        ]
+      },
+      "location": 1
+    }
+  ]
+}
