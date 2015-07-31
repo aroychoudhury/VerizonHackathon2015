@@ -54,6 +54,27 @@
   
     $(document).ready(function(){
 	
+	$.ajax({
+    type: 'GET',
+    dataType:'json',
+    url: 'http://localhost:8080/codeavengers/categories',
+    success: function(responseData) {
+    $('.catregory').append("<option value='select'> Select</option>");
+    for (var key1 in responseData) {
+	var datalist = responseData[key1];
+        for (var key2 in datalist) {
+		
+		console.log(Object.prototype.toString.apply(datalist[key2]));
+		
+		
+		}
+    }
+
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //TODO  
+    }
+});
 		function accidentsmap(){
 			var list = [], list1,map;
 				list1 = {lat:20.385181,lng:72.911453};
@@ -422,9 +443,7 @@
                             <br/>
                             <label> Choose Category </label> 
 					<select class="category">
-  						<option value='select'>Select</option>
-  						<option value="Accidents">Accidents</option>
- 					</select>
+  					</select>
 				
 				<div id='map' style='display: none;'></div>
                         </div>
