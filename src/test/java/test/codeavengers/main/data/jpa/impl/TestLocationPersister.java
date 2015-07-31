@@ -51,7 +51,7 @@ public class TestLocationPersister {
 		LocationMaster location = new LocationMaster();
 		location.setArea("Hyderabad");
 		location.setCode("HYD");
-		location.setParentLocationId(1L);
+		location.setParentLocationId(2L);
 		location.setLatitude("27.00000");
 		location.setLongitude("27.00000");
 		location.setAssociations(new ArrayList<LocationCategoryAssn>(1));
