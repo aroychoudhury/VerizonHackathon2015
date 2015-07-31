@@ -1,19 +1,21 @@
 /* Copyright 2015 Code Avengers */
 
-package org.codeavengers.common.dto.impl;
+package org.codeavengers.common.dto.entity;
 
-import org.codeavengers.common.dto.DataObject;
+import java.sql.ResultSet;
+
+import org.codeavengers.common.dto.DBEntity;
 
 /**
  * This is a wrapper for values/data in a simple {@link ResultSet} data row.
  * 
  * @author abhishek
  * @since 1.0
- * @see org.codeavengers.common.dto.DataObject
+ * @see org.codeavengers.common.dto.DBEntity
  * @see java.sql.ResultSet
  */
-public class Result extends DataObject {
-    private static final long serialVersionUID = -1545023356490777880L;
+public class Result implements DBEntity {
+    private static final long serialVersionUID = 8960783086955058347L;
 
     /**
      * Contains the value as per the data row.

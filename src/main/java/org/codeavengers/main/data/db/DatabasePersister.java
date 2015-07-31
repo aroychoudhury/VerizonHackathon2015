@@ -2,6 +2,7 @@
 
 package org.codeavengers.main.data.db;
 
+import org.codeavengers.common.dto.DBEntity;
 import org.codeavengers.main.data.Persister;
 
 /**
@@ -11,4 +12,5 @@ import org.codeavengers.main.data.Persister;
  * @since 1.0
  */
 public interface DatabasePersister extends Persister {
+    DBEntity query(String query);
 }

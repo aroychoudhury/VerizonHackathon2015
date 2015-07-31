@@ -3,7 +3,6 @@
  */
 package org.codeavengers.common.dto.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.codeavengers.common.dto.DBEntity;
 
 /**
- * This is the JPA Entity for <b>LOCATION_MASTER</b>.
+ * This is the JPA DBEntity for <b>LOCATION_MASTER</b>.
  * 
  * @author abhishek
  * @since 1.0
@@ -30,27 +28,26 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "LOCATION_MASTER")
 @SequenceGenerator(name = "locationId", sequenceName = "locationId", allocationSize = 1, initialValue = 1)
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class LocationMaster implements Serializable {
-    private static final long serialVersionUID = 5993116595957248610L;
-    private Long                       locationId;
-    private Long                       parentLocationId;
+public class LocationMaster implements DBEntity {
+    private static final long serialVersionUID = -5484290121775187900L;
+    private Long                       locId;
+    private Long                       parentLocId;
     private String                     area;
     private String                     code;
-    private String                     latitude;
-    private String                     longitude;
-    private List<LocationCategoryAssn> associations;
+    private String                     lat;
+    private String                     lon;
+    private List<LocationCategoryAssn> assns;
 
     /**
-     * @return the locationId
+     * @return the locId
      * @author abhishek
      * @since 1.0
      */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "locationId")
     @Column(name = "locationId", nullable = false)
-    public Long getLocationId() {
-        return locationId;
+    public Long getLocId() {
+        return locId;
     }
 
     /**
@@ -59,8 +56,8 @@ public class LocationMaster implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
+    public void setLocId(Long locationId) {
+        this.locId = locationId;
     }
 
     /**
@@ -69,18 +66,18 @@ public class LocationMaster implements Serializable {
      * @since 1.0
      */
     @Column(name = "parentLocationId", nullable = false)
-    public Long getParentLocationId() {
-        return parentLocationId;
+    public Long getParentLocId() {
+        return parentLocId;
     }
 
     /**
-     * @param parentLocationId
-     *            the parentLocationId to set
+     * @param parentLocId
+     *            the parentLocId to set
      * @author abhishek
      * @since 1.0
      */
-    public void setParentLocationId(Long parentLocationId) {
-        this.parentLocationId = parentLocationId;
+    public void setParentLocId(Long parentLocationId) {
+        this.parentLocId = parentLocationId;
     }
 
     /**
@@ -129,8 +126,8 @@ public class LocationMaster implements Serializable {
      * @since 1.0
      */
     @Column(name = "latitude", nullable = false)
-    public String getLatitude() {
-        return latitude;
+    public String getLat() {
+        return lat;
     }
 
     /**
@@ -139,8 +136,8 @@ public class LocationMaster implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setLat(String latitude) {
+        this.lat = latitude;
     }
 
     /**
@@ -149,8 +146,8 @@ public class LocationMaster implements Serializable {
      * @since 1.0
      */
     @Column(name = "longitude", nullable = false)
-    public String getLongitude() {
-        return longitude;
+    public String getLon() {
+        return lon;
     }
 
     /**
@@ -159,8 +156,8 @@ public class LocationMaster implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setLon(String longitude) {
+        this.lon = longitude;
     }
 
     /**
@@ -169,11 +166,11 @@ public class LocationMaster implements Serializable {
      * @since 1.0
      */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "location", cascade = CascadeType.ALL)
-    public List<LocationCategoryAssn> getAssociations() {
-        if (null == this.associations) {
-            this.associations = new ArrayList<LocationCategoryAssn>(1);
+    public List<LocationCategoryAssn> getAssns() {
+        if (null == this.assns) {
+            this.assns = new ArrayList<LocationCategoryAssn>(1);
         }
-        return associations;
+        return assns;
     }
 
     /**
@@ -182,8 +179,8 @@ public class LocationMaster implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setAssociations(List<LocationCategoryAssn> associations) {
-        this.associations = associations;
+    public void setAssns(List<LocationCategoryAssn> associations) {
+        this.assns = associations;
     }
 
     /**
@@ -195,7 +192,7 @@ public class LocationMaster implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((locationId == null) ? 0 : locationId.hashCode());
+        result = prime * result + ((locId == null) ? 0 : locId.hashCode());
         return result;
     }
 
@@ -216,11 +213,11 @@ public class LocationMaster implements Serializable {
             return false;
         }
         LocationMaster other = (LocationMaster) obj;
-        if (locationId == null) {
-            if (other.locationId != null) {
+        if (locId == null) {
+            if (other.locId != null) {
                 return false;
             }
-        } else if (!locationId.equals(other.locationId)) {
+        } else if (!locId.equals(other.locId)) {
             return false;
         }
         return true;
@@ -233,7 +230,7 @@ public class LocationMaster implements Serializable {
      */
     @Override
     public String toString() {
-        return "LocationMaster [id=" + locationId + " ( " + parentLocationId + " ), area=" + area + " ( " + code + " ) located at [ " + latitude + ", " + longitude + " ]";
+        return "LocationWrapper [id=" + locId + " ( " + parentLocId + " ), area=" + area + " ( " + code + " ) located at [ " + lat + ", " + lon + " ]";
     }
 
 }

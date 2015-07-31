@@ -4,7 +4,7 @@ package org.codeavengers.main.web;
 
 import org.codeavengers.common.dto.entity.LocationCategoryAssn;
 import org.codeavengers.common.dto.entity.LocationMaster;
-import org.codeavengers.main.data.db.impl.GenericReadOnlyPersister;
+import org.codeavengers.main.data.db.DatabasePersister;
 import org.codeavengers.main.data.jpa.JPAPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PingController {
     @Autowired
     @Qualifier("GenericReadOnlyPersister")
-    private GenericReadOnlyPersister persister = null;
+    private DatabasePersister persister = null;
 
     @Autowired
 	@Qualifier("LocationPersister")
@@ -44,7 +44,7 @@ public class PingController {
     public LocationMaster getLocation() {
 		LocationMaster location = locationPersister.retrieve(1L);
 		System.out.println("location -> " + location);
-		LocationCategoryAssn assn = location.getAssociations().get(0);
+		LocationCategoryAssn assn = location.getAssns().get(0);
 		System.out.println("assn -> " + assn);
 		System.out.println("Category -> " + assn.getCategory());
 		return location;

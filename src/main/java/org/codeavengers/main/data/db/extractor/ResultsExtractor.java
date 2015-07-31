@@ -9,8 +9,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codeavengers.common.dto.impl.Result;
-import org.codeavengers.common.dto.impl.Results;
+import org.codeavengers.common.dto.entity.Result;
+import org.codeavengers.common.dto.entity.Results;
 import org.codeavengers.main.data.db.AbstractExtractor;
 import org.springframework.dao.DataRetrievalFailureException;
 

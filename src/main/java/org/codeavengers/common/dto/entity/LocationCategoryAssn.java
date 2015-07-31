@@ -3,8 +3,6 @@
  */
 package org.codeavengers.common.dto.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codeavengers.common.dto.DBEntity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * This is the JPA Entity for <b>REPORT_ASSOCIATION</b>.
+ * This is the JPA DBEntity for <b>REPORT_ASSOCIATION</b>.
  * 
  * @author abhishek
  * @since 1.0
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "REPORT_ASSOCIATION")
 @SequenceGenerator(name = "reportId", sequenceName = "reportId", allocationSize = 1, initialValue = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class LocationCategoryAssn implements Serializable {
+public class LocationCategoryAssn implements DBEntity {
     private static final long serialVersionUID = -9215521694003691234L;
     private Long           assnId;
     private String         categoryField;

@@ -3,7 +3,6 @@
  */
 package org.codeavengers.common.dto.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +17,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codeavengers.common.dto.DBEntity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * This is the JPA Entity for <b>REPORT_CATEGORY</b>.
+ * This is the JPA DBEntity for <b>REPORT_CATEGORY</b>.
  * 
  * @author abhishek
  * @since 1.0
@@ -31,11 +32,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "REPORT_CATEGORY")
 @SequenceGenerator(name = "categoryId", sequenceName = "categoryId", allocationSize = 1, initialValue = 1)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Category implements Serializable {
-    private static final long serialVersionUID = -6123840752981875041L;
-    private Long                       categoryId;
-    private String                     reportCategory;
-    private List<LocationCategoryAssn> associations;
+public class Category implements DBEntity {
+    private static final long serialVersionUID = -7428117920763750085L;
+    private Long                       catId;
+    private String                     catDesc;
+    private List<LocationCategoryAssn> assns;
 
     /**
      * @return the categoryId
@@ -45,8 +46,8 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoryId")
     @Column(name = "categoryId", nullable = false)
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getCatId() {
+        return catId;
     }
 
     /**
@@ -55,18 +56,18 @@ public class Category implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCatId(Long categoryId) {
+        this.catId = categoryId;
     }
 
     /**
-     * @return the reportCategory
+     * @return the catDesc
      * @author abhishek
      * @since 1.0
      */
     @Column(name = "reportCategory", nullable = false)
-    public String getReportCategory() {
-        return reportCategory;
+    public String getCatDesc() {
+        return catDesc;
     }
 
     /**
@@ -75,8 +76,8 @@ public class Category implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setReportCategory(String reportCategory) {
-        this.reportCategory = reportCategory;
+    public void setCatDesc(String reportCategory) {
+        this.catDesc = reportCategory;
     }
 
     /**
@@ -85,11 +86,11 @@ public class Category implements Serializable {
      * @since 1.0
      */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
-    public List<LocationCategoryAssn> getAssociations() {
-        if (null == this.associations) {
-            this.associations = new ArrayList<LocationCategoryAssn>(1);
+    public List<LocationCategoryAssn> getAssns() {
+        if (null == this.assns) {
+            this.assns = new ArrayList<LocationCategoryAssn>(1);
         }
-        return associations;
+        return assns;
     }
 
     /**
@@ -98,8 +99,8 @@ public class Category implements Serializable {
      * @author abhishek
      * @since 1.0
      */
-    public void setAssociations(List<LocationCategoryAssn> associations) {
-        this.associations = associations;
+    public void setAssns(List<LocationCategoryAssn> associations) {
+        this.assns = associations;
     }
 
     /**
@@ -111,7 +112,7 @@ public class Category implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
+        result = prime * result + ((catId == null) ? 0 : catId.hashCode());
         return result;
     }
 
@@ -132,11 +133,11 @@ public class Category implements Serializable {
             return false;
         }
         Category other = (Category) obj;
-        if (categoryId == null) {
-            if (other.categoryId != null) {
+        if (catId == null) {
+            if (other.catId != null) {
                 return false;
             }
-        } else if (!categoryId.equals(other.categoryId)) {
+        } else if (!catId.equals(other.catId)) {
             return false;
         }
         return true;
@@ -149,6 +150,6 @@ public class Category implements Serializable {
      */
     @Override
     public String toString() {
-        return "Category [id=" + categoryId + ", reportCategory=" + reportCategory + "]";
+        return "Category [id=" + catId + ", description=" + catDesc + "]";
     }
 }

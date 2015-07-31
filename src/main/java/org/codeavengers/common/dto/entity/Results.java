@@ -1,11 +1,11 @@
 /* Copyright 2015 Code Avengers */
 
-package org.codeavengers.common.dto.impl;
+package org.codeavengers.common.dto.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codeavengers.common.dto.DataObject;
+import org.codeavengers.common.dto.DBEntity;
 
 /**
  * This is a wrapper for a list of {@link Result} object.
@@ -15,12 +15,12 @@ import org.codeavengers.common.dto.DataObject;
  * 
  * @author abhishek
  * @since 1.0
- * @see org.codeavengers.common.dto.impl.Result
- * @see org.codeavengers.common.dto.DataObject
+ * @see org.codeavengers.common.dto.entity.Result
+ * @see org.codeavengers.common.dto.DBEntity
  * @see java.util.List
  */
-public class Results extends DataObject {
-    private static final long serialVersionUID = 2266786886412929401L;
+public class Results implements DBEntity {
+    private static final long serialVersionUID = -1679135433372626950L;
 
     /**
      * Contains a list of {@link Result}.

@@ -51,22 +51,22 @@ public class TestLocationPersister {
 		LocationMaster location = new LocationMaster();
 		location.setArea("Hyderabad");
 		location.setCode("HYD");
-		location.setParentLocationId(2L);
-		location.setLatitude("27.00000");
-		location.setLongitude("27.00000");
-		location.setAssociations(new ArrayList<LocationCategoryAssn>(1));
+		location.setParentLocId(2L);
+		location.setLat("27.00000");
+		location.setLon("27.00000");
+		location.setAssns(new ArrayList<LocationCategoryAssn>(1));
 
 		Category category = new Category();
-		category.setReportCategory("Accidents");
-		category.setAssociations(new ArrayList<LocationCategoryAssn>(1));
+		category.setCatDesc("Accidents");
+		category.setAssns(new ArrayList<LocationCategoryAssn>(1));
 
 		LocationCategoryAssn assn = new LocationCategoryAssn();
 		assn.setCategory(category);
 		assn.setLocation(location);
 		assn.setCategoryField("No. of Persons");
 		assn.setCategoryValue("29081");
-		location.getAssociations().add(assn);
-		category.getAssociations().add(assn);
+		location.getAssns().add(assn);
+		category.getAssns().add(assn);
 
 		//persister.add(location);
 		for(String beanName : appContext.getBeanDefinitionNames()) {
@@ -91,7 +91,7 @@ public class TestLocationPersister {
 	public void testRetrieve() {
 		LocationMaster location = persister.retrieve(1L);
 		System.out.println("location -> " + location);
-		LocationCategoryAssn assn = location.getAssociations().get(0);
+		LocationCategoryAssn assn = location.getAssns().get(0);
 		System.out.println("assn -> " + assn);
 		System.out.println("Category -> " + assn.getCategory());
 	}

@@ -6,25 +6,25 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.codeavengers.common.dto.entity.LocationMaster;
+import org.codeavengers.common.dto.entity.Category;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
 /**
  * This Class is responsible for all operations on the
- * {@link org.codeavengers.common.dto.entity.LocationMaster} entity. This
- * includes all CRUD operations.
+ * {@link org.codeavengers.common.dto.entity.Category} entity. This includes all
+ * CRUD operations.
  * 
  * @author abhishek
  * @since 1.0
- * @see org.codeavengers.common.dto.entity.LocationMaster
+ * @see org.codeavengers.common.dto.entity.Category
  * @see org.codeavengers.main.data.jpa.AbstractJPAPersister
  * @see org.springframework.stereotype.Repository
  */
 @Transactional
-@Repository("LocationPersister")
-public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster> {
+@Repository("CategoryPersister")
+public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
     /**
      * @author abhishek
      * @since 1.0
@@ -32,22 +32,22 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
      */
     @Override
     public String identify() {
-        return LocationPersister.class.getSimpleName();
+        return CategoryPersister.class.getSimpleName();
     }
 
     /**
      * @param location
      *            Instance of the
-     *            {@link org.codeavengers.common.dto.entity.LocationMaster} to
+     *            {@link org.codeavengers.common.dto.entity.Category} to
      *            add/insert
      * @author abhishek
      * @since 1.0
      * @see org.codeavengers.main.data.jpa.JPAPersister#add(java.lang.Object)
      */
     @Override
-    public LocationMaster add(LocationMaster location) {
+    public Category add(Category location) {
         if (null == location) {
-            throw new InvalidDataAccessApiUsageException("LocationWrapper cannot be NULL");
+            throw new InvalidDataAccessApiUsageException("Category cannot be NULL");
         }
         this.getSession().persist(location);
         return location;
@@ -56,18 +56,17 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
     /**
      * @param location
      *            Instance of the
-     *            {@link org.codeavengers.common.dto.entity.LocationMaster} to
-     *            update
+     *            {@link org.codeavengers.common.dto.entity.Category} to update
      * @author abhishek
      * @since 1.0
      * @see org.codeavengers.main.data.jpa.JPAPersister#update(java.lang.Object)
      */
     @Override
-    public LocationMaster update(LocationMaster location) {
+    public Category update(Category location) {
         if (null == location) {
-            throw new InvalidDataAccessApiUsageException("LocationWrapper cannot be NULL");
+            throw new InvalidDataAccessApiUsageException("Category cannot be NULL");
         }
-        return (LocationMaster) this.getSession().merge(location);
+        return (Category) this.getSession().merge(location);
     }
 
     /**
@@ -76,8 +75,8 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
      * @see org.codeavengers.main.data.jpa.JPAPersister#delete(java.lang.Object)
      */
     @Override
-    public LocationMaster delete(Long id) {
-        LocationMaster location = this.retrieve(id);
+    public Category delete(Long id) {
+        Category location = this.retrieve(id);
         this.getSession().delete(location);
         return location;
     }
@@ -85,14 +84,14 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
     /**
      * @param id
      *            The unique id by which to fetch the
-     *            {@link org.codeavengers.common.dto.entity.LocationMaster}
+     *            {@link org.codeavengers.common.dto.entity.Category}
      * @author abhishek
      * @since 1.0
      * @see org.codeavengers.main.data.JPAPersister#retrieve(java.io.Serializable)
      */
     @Override
-    public LocationMaster retrieve(Long id) {
-        return (LocationMaster) this.getSession().get(LocationMaster.class, id);
+    public Category retrieve(Long id) {
+        return (Category) this.getSession().get(Category.class, id);
     }
 
     /**
@@ -102,8 +101,8 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<LocationMaster> retrieveAll() {
-        return this.getSession().createCriteria(LocationMaster.class).list();
+    public List<Category> retrieveAll() {
+        return this.getSession().createCriteria(Category.class).list();
     }
 
 }

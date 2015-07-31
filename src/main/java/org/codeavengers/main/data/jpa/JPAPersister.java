@@ -1,5 +1,7 @@
 package org.codeavengers.main.data.jpa;
 
+import java.util.List;
+
 import org.codeavengers.main.data.Persister;
 
 /**
@@ -58,4 +60,16 @@ public interface JPAPersister<K, V> extends Persister {
      * @since 1.0
      */
     V retrieve(K id);
+
+    /**
+     * Retrieves all the data from the data store in question. This method might
+     * slow down operation when there is too many data.
+     * 
+     * @param id
+     *            unique identifier for the element to be retrieved
+     * @return the returned element
+     * @author abhishek
+     * @since 1.0
+     */
+    List<V> retrieveAll();
 }

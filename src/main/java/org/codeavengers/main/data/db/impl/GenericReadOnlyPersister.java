@@ -2,7 +2,7 @@
 
 package org.codeavengers.main.data.db.impl;
 
-import org.codeavengers.common.dto.DataObject;
+import org.codeavengers.common.dto.DBEntity;
 import org.codeavengers.main.data.db.AbstractPersister;
 import org.codeavengers.main.data.db.extractor.ResultsExtractor;
 import org.springframework.stereotype.Repository;
@@ -22,9 +22,10 @@ public class GenericReadOnlyPersister extends AbstractPersister {
      * @author abhishek
      * @since 1.0
      */
-    public DataObject query(String query) {
-        if (null == query) {
-            
+    @Override
+    public DBEntity query(String query) {
+        if (null == query || "".equals(query.trim())) {
+            throw new IllegalArgumentException();
         }
         return this.executeQuery("SELECT * FROM users", new ResultsExtractor());
     }
