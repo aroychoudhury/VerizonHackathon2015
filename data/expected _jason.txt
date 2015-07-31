@@ -1,6 +1,6 @@
 
 ********** Taking sample category as Accidents **************
-service which gives categories on load :
+service which gives categories on load : http://localhost:8080/codeavengers/categories/
 
 [
 {
@@ -13,7 +13,7 @@ categoryId:"2"
 }
 ]
 
-service which gives location on selection of a category:
+service which gives location on selection of a category : http://localhost:8080/codeavengers/categories/{id}
 
 [{
 lat:"20.343",//sample data
