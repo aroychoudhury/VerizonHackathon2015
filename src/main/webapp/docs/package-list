@@ -1,0 +1,15 @@
+org.codeavengers.common.dto
+org.codeavengers.common.dto.entity
+org.codeavengers.common.dto.wrap
+org.codeavengers.concept.trials
+org.codeavengers.main.data
+org.codeavengers.main.data.db
+org.codeavengers.main.data.db.extractor
+org.codeavengers.main.data.db.impl
+org.codeavengers.main.data.jpa
+org.codeavengers.main.data.jpa.impl
+org.codeavengers.main.service
+org.codeavengers.main.service.impl
+org.codeavengers.main.web
+org.codeavengers.spring.config
+test.codeavengers.main.data.jpa.impl
