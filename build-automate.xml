@@ -49,7 +49,7 @@
 		<echo message="Tomcat stopped in background"/>
 	</target>
 
-	<target name="tomcat-stop-foreground" description="Stops Tomcat" depends="check-tomcat" if="tomcat.exists">
+	<target name="tomcat-stop-foreground" description="Stops Tomcat without doing anything else">
 		<echo message="Tomcat install verification has been verified at: ${tomcat.home}" />
 		<java classname="org.apache.catalina.startup.Bootstrap" fork="true">
 			<classpath path="${tomcat.home}/bin/bootstrap.jar:${tomcat.home}/bin/tomcat-juli.jar" />
@@ -72,7 +72,7 @@
 		<echo message="Tomcat started in background"/>
 	</target>
 
-	<target name="tomcat-start-foreground" description="Starts Tomcat" depends="copy-war" if="war.exists">
+	<target name="tomcat-start-foreground" description="Starts Tomcat without doing anything else">
 		<java classname="org.apache.catalina.startup.Bootstrap" fork="true">
 			<classpath path="${tomcat.home}/bin/bootstrap.jar:${tomcat.home}/bin/tomcat-juli.jar" />
 			<jvmarg value="-Dcatalina.home=${tomcat.home}"/>
