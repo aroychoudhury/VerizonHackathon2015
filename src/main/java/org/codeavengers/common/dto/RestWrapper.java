@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @author abhishek
  * @since 1.0
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_EMPTY)
 public class RestWrapper {
     private Rest   data     = null;
     @SuppressWarnings("rawtypes")

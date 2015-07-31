@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * @author abhishek
  * @since 1.0
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_EMPTY)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class LocationWrapper extends LocationMaster implements Rest {
     private static final long serialVersionUID = 771354173420804901L;
@@ -108,6 +108,9 @@ public class LocationWrapper extends LocationMaster implements Rest {
 
     public static LocationWrapper liteConvert(LocationMaster location) {
         LocationWrapper wrapper = new LocationWrapper();
+        if (null == location) {
+            return wrapper;
+        }
         wrapper.setLocId(location.getLocId());
         wrapper.setArea(location.getArea());
         wrapper.setCode(location.getCode());
@@ -119,6 +122,9 @@ public class LocationWrapper extends LocationMaster implements Rest {
 
     public static LocationMaster liteRevert(LocationWrapper wrapper) {
         LocationMaster location = new LocationMaster();
+        if (null == wrapper) {
+            return location;
+        }
         location.setLocId(wrapper.getLocId());
         location.setArea(wrapper.getArea());
         location.setCode(wrapper.getCode());

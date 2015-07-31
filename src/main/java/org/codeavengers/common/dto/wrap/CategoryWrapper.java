@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * @see org.codeavengers.common.dto.Rest
  * @see org.codeavengers.common.dto.entity.Category
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_EMPTY)
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class CategoryWrapper extends Category implements Rest {
     private static final long serialVersionUID = 6665582077591986873L;
@@ -110,6 +110,9 @@ public class CategoryWrapper extends Category implements Rest {
 
     public static CategoryWrapper liteConvert(Category category) {
         CategoryWrapper wrapper = new CategoryWrapper();
+        if (null == category) {
+            return wrapper;
+        }
         wrapper.setCatId(category.getCatId());
         wrapper.setCatDesc(category.getCatDesc());
         wrapper.setAssns(null); // prevent this turning up in response
@@ -118,6 +121,9 @@ public class CategoryWrapper extends Category implements Rest {
 
     public static Category liteRevert(CategoryWrapper wrapper) {
         Category category = new Category();
+        if (null == wrapper) {
+            return category;
+        }
         category.setCatId(wrapper.getCatId());
         category.setCatDesc(wrapper.getCatDesc());
         return category;

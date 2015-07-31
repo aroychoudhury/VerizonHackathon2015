@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 1.0
  */
 @RestController
-public class MapDataController {
+public class MapDataController extends BaseController {
     @Autowired
     @Qualifier("MapDataService")
     private MapDataService mapData = null;
@@ -28,7 +28,11 @@ public class MapDataController {
     @ResponseBody
     public RestWrapper getCategories() {
         RestWrapper wrapper = new RestWrapper();
-        wrapper.setDataList(mapData.getCategories());
+        try {
+            wrapper.setDataList(mapData.getCategories());
+        } catch (Exception e) {
+            wrapper.setErrStack(this.getStackTrace(e));
+        }
         return wrapper;
     }
 
@@ -36,7 +40,11 @@ public class MapDataController {
     @ResponseBody
     public RestWrapper getCategory(@PathVariable Long id) {
         RestWrapper wrapper = new RestWrapper();
-        wrapper.setData(mapData.getCategory(id));
+        try {
+            wrapper.setData(mapData.getCategory(id));
+        } catch (Exception e) {
+            wrapper.setErrStack(this.getStackTrace(e));
+        }
         return wrapper;
     }
 }
