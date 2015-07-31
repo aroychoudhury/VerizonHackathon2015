@@ -1,0 +1,45 @@
+
+********** Taking sample category as Accidents **************
+service which gives categories on load :
+
+[
+{
+category:"Accidents",
+categoryId:"1"
+},
+{
+category:"Accidents",
+categoryId:"2"
+}
+]
+
+service which gives location on selection of a category:
+
+[{
+lat:"20.343",//sample data
+lng:"77.545",//sample data
+location:"Hyd",//
+title:"Hyderabad",//if it is available
+locationId:"1",
+data:"28909"//this can be added to the title i will show that if possible while parsing you can give... this will be the value for the entire location.
+},
+{
+lat:"33.343",//sample data
+lng:"44.545",//sample data
+location:"Chennai",//if it is available
+locationId:"2",
+data:"420304"
+}
+]
+
+service which gives the associations data on click of a location://since this service will be only showing in the pie chart i dont need any ids
+[
+{
+categoryField:"Auto Accidents",//
+data:"123",
+},
+{
+categoryField:"Road Accidents",//
+data:"456",
+}
+]
