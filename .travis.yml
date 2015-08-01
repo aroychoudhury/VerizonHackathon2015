@@ -16,4 +16,5 @@ deploy:
   organization: abhishek.org
   space: development
   on:
+  	branch: master
     repo: aroychoudhury/VerizonHackathon2015
