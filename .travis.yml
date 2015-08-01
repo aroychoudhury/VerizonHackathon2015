@@ -17,3 +17,4 @@ deploy:
   space: development
   on:
     repo: aroychoudhury/VerizonHackathon2015
+    all_branches: true
