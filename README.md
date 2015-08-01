@@ -1,4 +1,5 @@
-# Verizon India (VDSI) Hackathon July 2015 <img src="https://travis-ci.org/aroychoudhury/VerizonHackathon2015.svg"/>
+# Verizon India (VDSI) Hackathon July 2015
+<img src="https://travis-ci.org/aroychoudhury/VerizonHackathon2015.svg"/>
 
 This is the Project created for Verizon India (VDSI) Hackathon 2015.
 
@@ -6,7 +7,11 @@ This is the Project created for Verizon India (VDSI) Hackathon 2015.
 
 * Venue : Raheja IT Park (Mindspace), Building No. 10, Titus, 5th Floor, Cafeteria
 * Start Time : July 29th, 2015 10:00 am
-* End Time : July 30th, 2015 4:00 pm 
+* End Time : August 3rd, 2015 12:00 am
+
+## Integrations Details:
+
+* Continuous Integration : [Travis](https://travis-ci.org/aroychoudhury/VerizonHackathon2015)
 
 ## Bugs and Issues:
 
