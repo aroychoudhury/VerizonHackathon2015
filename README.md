@@ -1,5 +1,5 @@
 # Verizon India (VDSI) Hackathon July 2015
-<img src="https://travis-ci.org/aroychoudhury/VerizonHackathon2015.svg"/>
+[![Build Status](https://travis-ci.org/aroychoudhury/VerizonHackathon2015.svg?branch=master)](https://travis-ci.org/aroychoudhury/VerizonHackathon2015)[![Coverage Status](https://coveralls.io/repos/aroychoudhury/VerizonHackathon2015/badge.svg?branch=master&service=github)](https://coveralls.io/github/aroychoudhury/VerizonHackathon2015?branch=master)
 
 This is the Project created for Verizon India (VDSI) Hackathon 2015.
 
