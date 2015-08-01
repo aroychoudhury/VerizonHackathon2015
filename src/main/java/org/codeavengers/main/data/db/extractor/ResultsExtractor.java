@@ -37,46 +37,56 @@ public class ResultsExtractor extends AbstractExtractor<Results> {
      */
     @Override
     public Results extractDataInternal(ResultSet resultSet) {
-        Results results = new Results();
-
         if (null == resultSet) {
-            return results;
+            return new Results();
         }
+        return this.process(resultSet);
+    }
 
+    private Results process(ResultSet resultSet) {
+        Results results = new Results();
         try {
-            /* ResultSetMetaData processing. Metadata follows index from 1. */
-            ResultSetMetaData metadata;
-            metadata = resultSet.getMetaData();
-            int count = metadata.getColumnCount();
-            int[] tmpTypes = new int[count];
-            String[] names = new String[count];
-            String[] types = new String[count];
-            for (int index = 0; index < count; index++) {
-                names[index] = metadata.getColumnName(index + 1);
-                tmpTypes[index] = metadata.getColumnType(index + 1);
-                types[index] = this.resolveType(tmpTypes[index]);
-            }
+            int[] tmpTypes = this.processMetadata(results, resultSet);
 
-            List<Result> entries = new ArrayList<Result>(20);
-            while (resultSet.next()) {
-                String[] values = new String[count];
-                for (int index = 0; index < count; index++) {
-                    values[index] = this.resolveObject(resultSet, tmpTypes[index], (index + 1));
-                }
-                entries.add(new Result(values));
-            }
+            List<Result> entries = this.processData(resultSet, tmpTypes);
 
-            results.setNames(names);
-            results.setTypes(types);
-
-            if (0 != entries.size()) {
-                results.setEntries(entries);
-            }
+            /* set if the entries have some valid values */
+            results.setEntries(entries.isEmpty() ? results.getEntries() : entries);
         } catch (SQLException e) {
             throw new DataRetrievalFailureException("ResultSet parsing failed", e);
         }
-
         return results;
+    }
+
+    private List<Result> processData(ResultSet resultSet, int[] tmpTypes) throws SQLException {
+        int count = tmpTypes.length;
+        List<Result> entries = new ArrayList<Result>(20);
+        while (resultSet.next()) {
+            String[] values = new String[count];
+            for (int index = 0; index < count; index++) {
+                values[index] = this.resolveObject(resultSet, tmpTypes[index], (index + 1));
+            }
+            entries.add(new Result(values));
+        }
+        return entries;
+    }
+
+    private int[] processMetadata(Results results, ResultSet resultSet) throws SQLException {
+        /* ResultSetMetaData processing. Metadata follows index from 1. */
+        ResultSetMetaData metadata;
+        metadata = resultSet.getMetaData();
+        int count = metadata.getColumnCount();
+        int[] tmpTypes = new int[count];
+        String[] names = new String[count];
+        String[] types = new String[count];
+        for (int index = 0; index < count; index++) {
+            names[index] = metadata.getColumnName(index + 1);
+            tmpTypes[index] = metadata.getColumnType(index + 1);
+            types[index] = this.resolveType(tmpTypes[index]);
+        }
+        results.setNames(names);
+        results.setTypes(types);
+        return tmpTypes;
     }
 
     /**

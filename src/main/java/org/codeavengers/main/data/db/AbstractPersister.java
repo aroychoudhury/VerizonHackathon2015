@@ -39,7 +39,7 @@ public abstract class AbstractPersister implements DatabasePersister {
      * @see org.springframework.jdbc.core.ResultSetExtractor
      * @see java.sql.ResultSet
      */
-    protected <T> T executeQuery(String query, ResultSetExtractor<T> extractor) {
+    public <T> T executeQuery(String query, ResultSetExtractor<T> extractor) {
         return this.template.query(query, extractor);
     }
 }

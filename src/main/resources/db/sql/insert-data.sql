@@ -1,7 +1,3 @@
-INSERT INTO users VALUES (1, 'mkyong', 'mkyong@gmail.com');
-INSERT INTO users VALUES (2, 'alex', 'alex@yahoo.com');
-INSERT INTO users VALUES (3, 'joel', 'joel@gmail.com');
-
-insert into LOCATION_MASTER (area, code, latitude, longitude, parentLocationId, locationId) values ('Hyderabad', 'HYD', '20.385181', '72.911453', 1, 1);
-insert into REPORT_CATEGORY (reportCategory, categoryId) values ('Accident', 1);
-insert into REPORT_ASSOCIATION (categoryId, categoryField, categoryValue, locationId, reportId) values (1, 'No. of Persons', '20890', 1, 1);
+insert into LOCATION_MASTER (locationId, parentLocationId, area, code, latitude, longitude) values (101, 101, 'Hyderabad', 'HYD', '20.385181', '72.911453');
+insert into REPORT_CATEGORY (categoryId, reportCategory) values (101, 'Population');
+insert into REPORT_ASSOCIATION (categoryId, locationId, reportId, categoryField, categoryValue) values (101, 101, 101, 'No. of Persons', '20890');

@@ -31,7 +31,7 @@ public class GenericReadOnlyPersister extends AbstractPersister {
         if (null == query || "".equals(query.trim())) {
             throw new IllegalArgumentException();
         }
-        return this.executeQuery("SELECT * FROM users", new ResultsExtractor());
+        return this.executeQuery(query, new ResultsExtractor());
     }
 
     /**

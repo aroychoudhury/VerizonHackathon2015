@@ -73,8 +73,10 @@ public class SpringRootConfig {
 	public DataSource dataSource() {
 		// no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL).addScript("/db/sql/create-main-tables.sql")
-				.addScript("/db/sql/create-tables.sql").addScript("/db/sql/insert-data.sql").build();
+		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL)
+				.addScript("/db/sql/create-tables.sql")
+				.addScript("/db/sql/insert-data.sql")
+				.build();
 		return db;
 	}
 }

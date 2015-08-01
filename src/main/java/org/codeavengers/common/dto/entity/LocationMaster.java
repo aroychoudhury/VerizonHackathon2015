@@ -65,7 +65,7 @@ public class LocationMaster implements DBEntity {
      * @author abhishek
      * @since 1.0
      */
-    @Column(name = "parentLocationId", nullable = false)
+    @Column(name = "parentLocationId", nullable = true)
     public Long getParentLocId() {
         return parentLocId;
     }
