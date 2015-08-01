@@ -1,1 +1,11 @@
 language: java
+
+jdk:
+  - oraclejdk7
+
+branches:
+  only:
+    - master
+
+after_success:
+  - mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID jacoco:report cobertura:cobertura coveralls:report
