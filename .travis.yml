@@ -1,11 +1,19 @@
 language: java
-
 jdk:
-  - oraclejdk7
-
+- oraclejdk7
 branches:
   only:
-    - master
-
+  - master
 after_success:
-  - mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID jacoco:report cobertura:cobertura coveralls:report
+- mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID jacoco:report cobertura:cobertura coveralls:report
+deploy:
+  provider:
+    provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: abhishek.roychoudhury@mailinator.com
+  password:
+    secure: nRH5JuPQ+tN+jFYimoof5AHjb4BztjlKcizRYWY8Lpv7SAOjMeuk03W4ohXQ4pPtgyxVvxiDvQaEQ2x4DCADOaq0UYSZt8s6hCywSXSo9yks8NSljtfnNi7EB39lS2qiy2kUMuQZ7wObxcJtYHW+eXN1ng+tuhgCvOP0mL9HVVNIvWYKhRP84MHivNWmjh3B967NZrJkT4w6XSUH92FChhojoPtwboz7BrY0yp7q2oE7iNrMEsRJCbpeY7j0e4fS8HnclGdArGe2S2B6gzcezuU9MsIOKZDFc5jIB7CU3mV/jA1eC8+io0YQmxcZwuh+XDWqWZXE4mB9bgFyzKIOl5cql4jjEcdQeoLR8TTdkDD3+Ixb4IeD2jV263ePCG4e5pI/sOzI2a779iEvNOJaCWW08w/3nLnI4Q1BWUnf+YcMltQYvz7rh9CrksntX5jdKsK2hciH5V2WBlw7EGEFlMAEp2eXltremBK+7ZpnVxBf3Dw8TXCg9HJS547aWXyn3eLoUtM0lP9Q822u1bRty4+kb59vAIl/ryIFMNmWgPFQohJ0Tcr5mVueUSGbbc6h5tx1yiqMSAQKe8zyZCVlKMIsakD/5BIh9uwFT1iS4DLgyV+iC8nrrLYdgW0su6IAF/ZnKb5k5k+/NeRdXUEBEznaaDFT3hl5+2t7a+GeiJU=
+  organization: abhishek.org
+  space: development
+  on:
+    repo: aroychoudhury/VerizonHackathon2015
