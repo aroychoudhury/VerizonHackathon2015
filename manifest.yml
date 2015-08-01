@@ -1,0 +1,3 @@
+applications:
+- name: bluemix-todo-python-mongo
+memory: 512M
