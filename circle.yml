@@ -4,9 +4,22 @@ dependencies:
     - sudo dpkg -i cf-cli_amd64.deb
     - cf -v
 
+machine:
+  java:
+    version: oraclejdk7
+
 test:
   post:
     - cf api https://api.run.pivotal.io
     - cf auth $PWS_USER $PWS_PASSWORD
     - cf target -o abhishek.org -s development
     - cf a
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - cf push codeavengerz -p ./target/codeavengers.war
+
+general:
+  build_dir: target
