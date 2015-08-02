@@ -1,3 +1,4 @@
 applications:
-- name: bluemix-todo-python-mongo
+- name: codeavengerz
 memory: 512M
+path: ./target/codeavengers.war
