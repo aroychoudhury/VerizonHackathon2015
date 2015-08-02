@@ -13,16 +13,16 @@ This Project is created for VDS India (VDSI) Hackathon July, 2015.
 
 ## Important Links:
 
-1. Repository -
+Repository -
 * [Github](https://github.com/aroychoudhury/VerizonHackathon2015)
-2. Continuous Integration -
+Continuous Integration -
 * [Travis CI](https://travis-ci.org/aroychoudhury/VerizonHackathon2015)
 * [Circle CI](https://circleci.com/gh/aroychoudhury/VerizonHackathon2015) 
-3. Deployment -
+Deployment -
 * [Pivotal CF](https://console.run.pivotal.io)
-4. Metrics:
+Metrics:
 * [Coveralls](https://coveralls.io/github/aroychoudhury/VerizonHackathon2015)
-5. Application:
+Application:
 * [Code Avengers](http://codeavengerz.cfapps.io/)
 
 ## Bugs and Issues:
