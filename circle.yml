@@ -19,4 +19,4 @@ deployment:
   production:
     branch: master
     commands:
-      - cf push codeavengerz -p ./VerizonHackathon2015/target/codeavengers.war
+      - cf push codeavengerz -p ./target/codeavengers.war
