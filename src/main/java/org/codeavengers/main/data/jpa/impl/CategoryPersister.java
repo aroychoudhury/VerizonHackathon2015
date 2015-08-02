@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.codeavengers.common.dto.entity.Category;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
@@ -37,7 +38,7 @@ public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
     }
 
     /**
-     * @param location
+     * @param category
      *            Instance of the
      *            {@link org.codeavengers.common.dto.entity.Category} to
      *            add/insert
@@ -46,16 +47,16 @@ public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
      * @see org.codeavengers.main.data.jpa.JPAPersister#add(java.lang.Object)
      */
     @Override
-    public Category add(Category location) {
-        if (null == location) {
+    public Category add(Category category) {
+        if (null == category) {
             throw new InvalidDataAccessApiUsageException("Category cannot be NULL");
         }
-        this.getSession().persist(location);
-        return location;
+        this.getSession().persist(category);
+        return category;
     }
 
     /**
-     * @param location
+     * @param category
      *            Instance of the
      *            {@link org.codeavengers.common.dto.entity.Category} to update
      * @author abhishek
@@ -63,11 +64,11 @@ public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
      * @see org.codeavengers.main.data.jpa.JPAPersister#update(java.lang.Object)
      */
     @Override
-    public Category update(Category location) {
-        if (null == location) {
+    public Category update(Category category) {
+        if (null == category) {
             throw new InvalidDataAccessApiUsageException("Category cannot be NULL");
         }
-        return (Category) this.getSession().merge(location);
+        return (Category) this.getSession().merge(category);
     }
 
     /**
@@ -77,9 +78,12 @@ public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
      */
     @Override
     public Category delete(Long id) {
-        Category location = this.retrieve(id);
-        this.getSession().delete(location);
-        return location;
+        Category category = this.retrieve(id);
+        if (null == category) {
+            throw new DataRetrievalFailureException("No Category found by that ID");
+        }
+        this.getSession().delete(category);
+        return category;
     }
 
     /**

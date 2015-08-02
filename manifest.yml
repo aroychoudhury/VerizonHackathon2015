@@ -1,4 +1,10 @@
 applications:
 - name: codeavengerz
-memory: 512M
-path: ./target/codeavengers.war
+  memory: 512M
+  path: ./target/codeavengers.war
+  services:
+    newrelic:
+      label: newrelic
+      provider: newrelic
+      version: n/a
+      plan: standard

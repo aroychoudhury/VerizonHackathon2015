@@ -17,7 +17,7 @@
 <!-- Custom CSS -->
 <link href="resources/css/agency.css" rel="stylesheet">
 <!-- jQuery -->
-    <script src="resources/js/jquery.js"></script>
+<script src="resources/js/jquery.js"></script>
 
 <!-- Custom Fonts -->
 <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -26,130 +26,153 @@
 <link href="resources/fonts/droid-serif.css" rel="stylesheet" type="text/css">
 <link href="resources/fonts/roboto-slab.css" rel="stylesheet" type="text/css">
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
-  <script type="text/javascript" src="resources/js/gmaps.js"></script> 
-  <script type="text/javascript" src="resources/js/jquery.flot.js"></script>
-  <script type="text/javascript" src="resources/js/jquery.flot.pie.js"></script>
-  <script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <style type="text/css"> 
-	#map
-	{
-		display: block;
-		width: 95%;
-		height: 600px;
-		margin: 0 auto;
-		-moz-box-shadow: 0px 5px 20px #ccc;
-		-webkit-box-shadow: 0px 5px 20px #ccc;
-		box-shadow: 0px 5px 20px #ccc;
-	}
-	.ui-dialog
-	{
-		z-index: 1060;
-	}
-  </style>
-  
-  <script type="text/javascript">
-  
-    $(document).ready(function(){
-	
-	$.ajax({
-    type: 'GET',
-    dataType:'json',
-    url: 'http://localhost:8080/codeavengers/categories',
-    success: function(responseData) {
-    $('.catregory').append("<option value='select'> Select</option>");
-    for (var key1 in responseData) {
-	var datalist = responseData[key1];
-        for (var key2 in datalist) {
-		
-		console.log(Object.prototype.toString.apply(datalist[key2]));
-		
-		
-		}
-    }
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
+<script type="text/javascript" src="resources/js/gmaps.js"></script>
+<script type="text/javascript" src="resources/js/jquery.flot.js"></script>
+<script type="text/javascript" src="resources/js/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style type="text/css">
+#map {
+    display: block;
+    width: 95%;
+    height: 600px;
+    margin: 0 auto;
+    -moz-box-shadow: 0px 5px 20px #ccc;
+    -webkit-box-shadow: 0px 5px 20px #ccc;
+    box-shadow: 0px 5px 20px #ccc;
+}
 
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //TODO  
-    }
-});
-		function accidentsmap(){
-			var list = [], list1,map;
-				list1 = {lat:20.385181,lng:72.911453};
-				list.push(list1);
-				list1 = {lat:18.296974,lng:83.896782};
-				list.push(list1);
-			    map = new GMaps({
-			        el: '#map',
-			        lat: 0,
-			        lng: 0,
-					zoom: 2
-			      });
-			  for (var i=0;i<list.length;i++) {
-				var item=list[i];
-				  map.addMarker({
-				  lat: item["lat"],
-				  lng: item["lng"],
-				  click: function() {
-					$('.dialog').dialog({
-						title: 'Details',
-						minWidth: 400,
-						modal:true,
-		                minHeight: 400,
-						open: function() {
-							var data = $.plot($(".dialog"), dataSet, options);
-									   $('.dialog').val(data);
+.ui-dialog {
+    z-index: 1060;
+}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+
+				$.ajax({
+					type : 'GET',
+					dataType : 'json',
+					url : 'http://localhost:8080/codeavengers/categories',
+					success : function(responseData) {
+						$('.catregory').append(
+								"<option value='select'> Select</option>");
+						for ( var key1 in responseData) {
+							var datalist = responseData[key1];
+							for ( var key2 in datalist) {
+
+								console.log(Object.prototype.toString
+										.apply(datalist[key2]));
+
+							}
 						}
-					});
-				  }
+
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						//TODO  
+					}
 				});
-			  }
-			  var dataSet = [
-			                 {label: "Asia", data: 4119630000, color: "#005CDE" },
-			                 { label: "Latin America", data: 590950000, color: "#00A36A" },
-			                 { label: "Africa", data: 1012960000, color: "#7D0096" },
-			                 { label: "Oceania", data: 35100000, color: "#992B00" },
-			                 { label: "Europe", data: 727080000, color: "#DE000F" },
-			                 { label: "North America", data: 344120000, color: "#ED7B00" }    
-			             ];
-			   var options = {
-				   series: {
-		        			pie: {
-		        				  show: true,
-			   					  tilt: 0.5
-		        			}
-		    		}
-				};
-		}
-		function emptymap(){
-			var map = new GMaps({
-		        el: '#map',
-		        lat: 0,
-		        lng: 0,
-				zoom: 2
-		      });
-		}
-		$('.category').change(function(){
-			var value=$('.category').val();
-			if (value==='Accidents') {
-				$('#map').show();
-				accidentsmap();
-			}
-			else if (value ==='select') {
-				$('#map').show();
-				emptymap();
-			}
-		});
-		$('#maps').on('click',function(){
-			$('#toggle').toggle();
-			$('.category').val('select');
-			$('#map').hide();
-		});
-    });
-	
-  </script>
+				function accidentsmap() {
+					var list = [], list1, map;
+					list1 = {
+						lat : 20.385181,
+						lng : 72.911453
+					};
+					list.push(list1);
+					list1 = {
+						lat : 18.296974,
+						lng : 83.896782
+					};
+					list.push(list1);
+					map = new GMaps({
+						el : '#map',
+						lat : 0,
+						lng : 0,
+						zoom : 2
+					});
+					for (var i = 0; i < list.length; i++) {
+						var item = list[i];
+						map.addMarker({
+							lat : item["lat"],
+							lng : item["lng"],
+							click : function() {
+								$('.dialog').dialog(
+										{
+											title : 'Details',
+											minWidth : 400,
+											modal : true,
+											minHeight : 400,
+											open : function() {
+												var data = $.plot($(".dialog"),
+														dataSet, options);
+												$('.dialog').val(data);
+											}
+										});
+							}
+						});
+					}
+					var dataSet = [ {
+						label : "Asia",
+						data : 4119630000,
+						color : "#005CDE"
+					}, {
+						label : "Latin America",
+						data : 590950000,
+						color : "#00A36A"
+					}, {
+						label : "Africa",
+						data : 1012960000,
+						color : "#7D0096"
+					}, {
+						label : "Oceania",
+						data : 35100000,
+						color : "#992B00"
+					}, {
+						label : "Europe",
+						data : 727080000,
+						color : "#DE000F"
+					}, {
+						label : "North America",
+						data : 344120000,
+						color : "#ED7B00"
+					} ];
+					var options = {
+						series : {
+							pie : {
+								show : true,
+								tilt : 0.5
+							}
+						}
+					};
+				}
+				function emptymap() {
+					var map = new GMaps({
+						el : '#map',
+						lat : 0,
+						lng : 0,
+						zoom : 2
+					});
+				}
+				$('.category').change(function() {
+					var value = $('.category').val();
+					if (value === 'Accidents') {
+						$('#map').show();
+						accidentsmap();
+					} else if (value === 'select') {
+						$('#map').show();
+						emptymap();
+					}
+				});
+				$('#maps').on('click', function() {
+					$('#toggle').toggle();
+					$('.category').val('select');
+					$('#map').hide();
+				});
+			});
+</script>
 </head>
 
 <body id="page-top" class="index">
@@ -196,87 +219,60 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Portfolio</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">Our Work and Achievements.</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-sm-6 portfolio-item">
+                <div class="col-sm-6 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal" data-keyboard="false">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
-                        </div> 
-                        <img src="resources/img/portfolio/roundicons.png" class="img-responsive" alt="">
-                     </a>
+                        </div> <img src="resources/img/portfolio/maps.jpg" class="img-responsive" alt="">
+                    </a>
                     <div class="portfolio-caption">
-                        <h4>Round Icons</h4>
-                        <p class="text-muted">Graphic Design</p>
+                        <h4>Map Dash</h4>
+                        <p class="text-muted">Map Analytics Dashboard</p>
                     </div>
                 </div>
-              <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                <div class="col-sm-6 portfolio-item">
+                    <a href="presentation/CodeAvengers_Hackathon_July2015.pdf" class="portfolio-link" target="_blank">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
-                        </div> <img src="resources/img/portfolio/startup-framework.png" class="img-responsive" alt="">
+                        </div> <img src="resources/img/portfolio/presentations.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Startup Framework</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>Presentation</h4>
+                        <p class="text-muted">Hackathon 2015 Code Avengers Presentation</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                <div class="col-sm-6 portfolio-item">
+                    <a href="docs/index.html" class="portfolio-link" target="_blank">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
-                        </div> <img src="resources/img/portfolio/treehouse.png" class="img-responsive" alt="">
+                        </div> <img src="resources/img/portfolio/documents.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Treehouse</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>Java Docs</h4>
+                        <p class="text-muted">Java Code Comments generated using javadoc</p>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                <div class="col-sm-6 portfolio-item">
+                    <a href="metrics/metrics.html" class="portfolio-link" target="_blank">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
-                        </div> <img src="resources/img/portfolio/golden.png" class="img-responsive" alt="">
+                        </div> <img src="resources/img/portfolio/metrics.jpg" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>Golden</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div> <img src="resources/img/portfolio/escape.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Escape</h4>
-                        <p class="text-muted">Website Design</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div> <img src="resources/img/portfolio/dreams.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Dreams</h4>
-                        <p class="text-muted">Website Design</p>
+                        <h4>Code Metrics</h4>
+                        <p class="text-muted">Code Quality Metrics generated by Google Code Pro</p>
                     </div>
                 </div>
             </div>
@@ -289,7 +285,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">How our journey started?</h3>
                 </div>
             </div>
             <div class="row">
@@ -297,7 +293,7 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/2.jpg" alt="">
+                                <img class="img-circle img-responsive" src="resources/img/about/hackathon.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -311,7 +307,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="resources/img/about/meeting.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -319,14 +315,16 @@
                                     <h4 class="subheading">Code Avengers is Born</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">We moved quickly to name our Team <b>Code Avengers</b>, formed a Ninja Team and completed registrations. We decided to 
-                                    	create something useful and reusable, learning some new technologies as we progressed.</p>
+                                    <p class="text-muted">
+                                        We moved quickly to name our Team <b>Code Avengers</b>, formed a Ninja Team and completed registrations. We decided to create something useful and reusable,
+                                        learning some new technologies as we progressed.
+                                    </p>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="resources/img/about/execution.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -334,23 +332,23 @@
                                     <h4 class="subheading">Executing the Plan</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">We started execution using the technologies we had decided upon. Implementing and Re-implementing new concepts as we 
-										progressed. The Idea was to Win the final Prize.</p>
+                                    <p class="text-muted">We started execution using the technologies we had decided upon. Implementing and Re-implementing new concepts as we progressed. The Idea
+                                        was to put in our Best and Honest Effort.</p>
                                 </div>
                             </div>
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="resources/img/about/5.jpg" alt="">
+                                <img class="img-circle img-responsive" src="resources/img/about/verizon.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>August 3</h4>
-                                    <h4 class="subheading">We Are Verizon!</h4>
+                                    <h4 class="subheading">Innovating for our Customers!</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">Now that we have the experience of participation, we want to encourage more of our team members to leverage this unique platform. A 
-                                    	platform for us to innovate for our customers.</p>
+                                    <p class="text-muted">Now that we have the experience of participation, we want to encourage more of our team members to leverage this unique platform. A
+                                        platform for us to innovate for our customers.</p>
                                 </div>
                             </div>
                         </li>
@@ -366,40 +364,64 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">A mixture of Creativity, Innovation and Experience.</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="resources/img/team/1.jpg" class="img-responsive img-circle" alt="">
+                        <img src="resources/img/team/kaja.jpg" class="img-responsive img-circle" alt="">
                         <h4>Srinivas Kaja</h4>
-                        <p class="text-muted">Lead Designer</p>
+                        <p class="text-muted">Creative Design Guru</p>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="resources/img/team/2.jpg" class="img-responsive img-circle" alt="">
+                        <img src="resources/img/team/abhishek.jpg" class="img-responsive img-circle" alt="">
                         <h4>Abhishek Roychoudhury</h4>
-                        <p class="text-muted">Lead Architect</p>
+                        <p class="text-muted">Little Bit Aged &amp; Experienced</p>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="resources/img/team/3.jpg" class="img-responsive img-circle" alt="">
+                        <img src="resources/img/team/shankar.jpg" class="img-responsive img-circle" alt="">
                         <h4>Shankar Kuppusamy</h4>
-                        <p class="text-muted">Lead Developer</p>
+                        <p class="text-muted">Innovation Specialist</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias
-                        ut unde.</p>
+                    <p class="large text-muted">Let's face it, we like to code. We got an opportunity and we took it with open hands. Thanks to the VDS India Team for organizing this Hackathon; it
+                        was a BLAST! As this event comes to a close, we are more encouraged than ever to look forward to more such platforms.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <aside class="clients hidden-md hidden-sm hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <a href="#"> <img src="resources/img/logos/hypersql.png" class="img-responsive img-centered" alt="" style="width: 60%; padding-top: 10px;">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#"> <img src="resources/img/logos/spring.png" class="img-responsive img-centered" alt="" style="width: 60%;">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#"> <img src="resources/img/logos/hibernate.png" class="img-responsive img-centered" alt="" style="width: 70%;">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#"> <img src="resources/img/logos/java.png" class="img-responsive img-centered" alt="" style="width: 60%;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
     <footer>
         <div class="container">
             <div class="row">
@@ -408,15 +430,12 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://github.com/aroychoudhury/VerizonHackathon2015" target="_blank"><i class="fa fa-github-alt"></i></a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="https://github.com/aroychoudhury/VerizonHackathon2015/blob/master/LICENSE" target="_blank">License</a></li>
                     </ul>
                 </div>
             </div>
@@ -440,19 +459,17 @@
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
                             <h2>Project Name</h2>
-                            <br/>
-                            <label> Choose Category </label> 
-					<select class="category">
-  					</select>
-				
-				<div id='map' style='display: none;'></div>
+                            <br /> <label> Choose Category </label> <select class="category">
+                            </select>
+
+                            <div id='map' style='display: none;'></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-	<div class='dialog' style='display: none;'></div>
+    <div class='dialog' style='display: none;'></div>
 
     <!-- Portfolio Modal 2 -->
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.codeavengers.common.dto.entity.LocationMaster;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
@@ -79,6 +80,9 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
     @Override
     public LocationMaster delete(Long id) {
         LocationMaster location = this.retrieve(id);
+        if (null == location) {
+            throw new DataRetrievalFailureException("No Location found by that ID");
+        }
         this.getSession().delete(location);
         return location;
     }

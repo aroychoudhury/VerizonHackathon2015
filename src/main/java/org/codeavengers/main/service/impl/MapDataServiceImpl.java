@@ -15,6 +15,7 @@ import org.codeavengers.main.data.jpa.JPAPersister;
 import org.codeavengers.main.service.MapDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -65,7 +66,11 @@ public class MapDataServiceImpl implements MapDataService {
         if (null == categoryId || 0L == categoryId.longValue()) {
             throw new IllegalArgumentException("Category ID cannot be empty");
         }
-        return CategoryWrapper.deepConvert(categoryPersister.retrieve(categoryId));
+        Category category = categoryPersister.retrieve(categoryId);
+        if (null == category) {
+            throw new DataRetrievalFailureException("No Category found by that ID");
+        }
+        return CategoryWrapper.deepConvert(category);
     }
 
     /**
@@ -125,6 +130,10 @@ public class MapDataServiceImpl implements MapDataService {
     public LocationWrapper getLocation(Long locationId) {
         if (null == locationId || 0L == locationId.longValue()) {
             throw new IllegalArgumentException("Location ID cannot be empty");
+        }
+        LocationMaster location = locationPersister.retrieve(locationId);
+        if (null == location) {
+            throw new DataRetrievalFailureException("No Location found by that ID");
         }
         return LocationWrapper.deepConvert(locationPersister.retrieve(locationId));
     }

@@ -51,6 +51,7 @@ public class MapDataController extends BaseController {
             wrapper.setDataList(mapData.getCategories());
         } catch (Exception e) {
             wrapper.setErrStack(this.getStackTrace(e));
+            wrapper.setError(e.getClass().getSimpleName(), e.getMessage());
         }
         return wrapper;
     }
@@ -81,6 +82,7 @@ public class MapDataController extends BaseController {
             wrapper.setData(mapData.getCategory(id));
         } catch (Exception e) {
             wrapper.setErrStack(this.getStackTrace(e));
+            wrapper.setError(e.getClass().getSimpleName(), e.getMessage());
         }
         return wrapper;
     }
