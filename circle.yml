@@ -4,10 +4,6 @@ dependencies:
     - sudo dpkg -i cf-cli_amd64.deb
     - cf -v
 
-test:
-  override:
-    - mvn verify
-
 machine:
   java:
     version: oraclejdk7
@@ -24,6 +20,3 @@ deployment:
     branch: master
     commands:
       - cf push codeavengerz -p ./VerizonHackathon2015/target/codeavengers.war
-
-general:
-  build_dir: target
