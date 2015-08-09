@@ -3,13 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>Map Dash</title>
+
 <!-- Bootstrap Core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="resources/css/agency.css" rel="stylesheet">
-<!-- jQuery -->
-<script src="resources/js/jquery.js"></script>
 
 <!-- Custom Fonts -->
 <link href="resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -17,140 +16,30 @@
 <link href="resources/fonts/kaushan-script.css" rel="stylesheet" type="text/css">
 <link href="resources/fonts/droid-serif.css" rel="stylesheet" type="text/css">
 <link href="resources/fonts/roboto-slab.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+
+<!-- jQuery -->
+<script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
-<script type="text/javascript" src="resources/js/gmaps.js"></script>
-<script type="text/javascript" src="resources/js/jquery.flot.js"></script>
-<script type="text/javascript" src="resources/js/jquery.flot.pie.js"></script>
-<script type="text/javascript" src="resources/js/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<style type="text/css">
-#map {
-    display: block;
-    height: 520px;
-    margin: 0 auto;
-    -moz-box-shadow: 0px 5px 20px #ccc;
-    -webkit-box-shadow: 0px 5px 20px #ccc;
-    box-shadow: 0px 5px 20px #ccc;
-}
-</style>
-
-<script type="text/javascript">
-	function emptymap() {
-		var map = new GMaps({
-			el : '#map',
-			lat : 0,
-			lng : 0,
-			zoom : 2
-		});
-	}
-
-	function accidentsmap() {
-		var list = [], list1, map;
-		list1 = {
-			lat : 20.385181,
-			lng : 72.911453
-		};
-		list.push(list1);
-		list1 = {
-			lat : 18.296974,
-			lng : 83.896782
-		};
-		list.push(list1);
-		map = new GMaps({
-			el : '#map',
-			lat : 0,
-			lng : 0,
-			zoom : 2
-		});
-		for (var i = 0; i < list.length; i++) {
-			var item = list[i];
-			map.addMarker({
-				lat : item["lat"],
-				lng : item["lng"]
-			});
-		}
-		var dataSet = [ {
-			label : "Asia",
-			data : 4119630000,
-			color : "#005CDE"
-		}, {
-			label : "Latin America",
-			data : 590950000,
-			color : "#00A36A"
-		}, {
-			label : "Africa",
-			data : 1012960000,
-			color : "#7D0096"
-		}, {
-			label : "Oceania",
-			data : 35100000,
-			color : "#992B00"
-		}, {
-			label : "Europe",
-			data : 727080000,
-			color : "#DE000F"
-		}, {
-			label : "North America",
-			data : 344120000,
-			color : "#ED7B00"
-		} ];
-		var options = {
-			series : {
-				pie : {
-					show : true,
-					tilt : 0.5
-				}
-			}
-		};
-	}
-
-	$(document)
-			.ready(
-					function() {
-						$
-								.ajax({
-									type : 'GET',
-									dataType : 'json',
-									url : 'categories',
-									success : function(responseData) {
-										var options = '<option value="select">Select</option>';
-										var idx = 0;
-										var datalist = responseData.dataList;
-										for (idx = 0; idx < datalist.length; idx++) {
-											options += '<option value="' + datalist[idx].catId + '">'
-													+ datalist[idx].catDesc
-													+ '</option>';
-										}
-										$('.category').append(options);
-										$('#map').show();
-										emptymap();
-									},
-									error : function(XMLHttpRequest,
-											textStatus, errorThrown) {
-										//TODO  
-									}
-								});
-						$('.category').change(function() {
-							var value = $('.category').val();
-							if (value != 'select') {
-								$('#map').show();
-								accidentsmap();
-							} else if (value === 'select') {
-								$('#map').show();
-								emptymap();
-							}
-						});
-						$('#maps').on('click', function() {
-							$('#toggle').toggle();
-							$('.category').val('select');
-							$('#map').hide();
-						});
-					});
-</script>
 </head>
 <body>
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Large Modal</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Modal Body</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" style="padding: 0 !important; background-color: #222 !important;">
         <div class="container">
@@ -161,7 +50,6 @@
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">Map Dash</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -172,50 +60,47 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray" style="padding: 70px 0;">
+    <!-- Map Section -->
+    <section class="bg-light-gray" style="padding: 70px 0;">
         <div class="container" style="z-index: 2;">
-            <div class="row">
+            <div class="row" style="padding-bottom: 5px;">
                 <div class="col-lg-12 text-right">
                     <div>
-                        <label>Choose Category</label> <select class="category">
-                        </select><!-- 
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Choose Category <span class="caret"></span>
+                        <div class="btn-group">
+                            <button id="categoryTxt" type="button" class="btn btn-default">Choose Category</button>
+                            <button id="categoryLabel" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span> <span class="sr-only">Choose Category...</span>
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div> -->
+                            <ul id="categoryMenu" role="menu" class="dropdown-menu" aria-labelledby="categoryLabel"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <div id='map' style='display: none;'></div>
+                    <div class="container-map">
+                        <div id="map" style="display: none;"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Bootstrap Core JavaScript -->
-    <script src="resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="resources/js/classie.js"></script>
-    <script src="resources/js/cbpAnimatedHeader.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="resources/js/jqBootstrapValidation.js"></script>
-    <script src="resources/js/contact_me.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="resources/js/classie.js"></script>
+    <script type="text/javascript" src="resources/js/cbpAnimatedHeader.js"></script>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.flot.js"></script>
+    <script type="text/javascript" src="resources/js/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="resources/js/gmaps.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="resources/js/agency.js"></script>
+
+    <!-- Custom Maps JavaScript -->
+    <script src="resources/js/maps.js"></script>
 </body>
 </html>
