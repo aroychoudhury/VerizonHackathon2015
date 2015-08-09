@@ -36,7 +36,7 @@ CREATE SEQUENCE reportId
 CREATE TABLE LOCATION_MASTER (
     locationId int  NOT NULL,
     parentLocationId int  NULL,
-    area varchar(50)  NOT NULL,
+    area varchar(200)  NOT NULL,
     code varchar(10)  NOT NULL,
     latitude varchar(20)  NOT NULL,
     longitude varchar(20)  NOT NULL,
