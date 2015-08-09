@@ -79,9 +79,6 @@ public class TestCategoryPersister extends ObjectMockingUtility {
     @Test
     public void testRetrieveAll() {
         List<Category> categories = persister.retrieveAll();
-        for (Category category : categories) {
-            System.out.println("Category : " + category);
-        }
         assertNotNull(categories);
         assertFalse(categories.isEmpty());
     }
