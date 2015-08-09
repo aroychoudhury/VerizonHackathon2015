@@ -49,7 +49,7 @@ public class TestCategoryPersister extends ObjectMockingUtility {
     @Rollback(true)
     @Test
     public void testUpdate() {
-        Category category = persister.retrieve(111L);
+        Category category = persister.retrieve(211L);
         assertNotNull(category);
 
         category.setCatDesc("Rainfall");
@@ -79,6 +79,9 @@ public class TestCategoryPersister extends ObjectMockingUtility {
     @Test
     public void testRetrieveAll() {
         List<Category> categories = persister.retrieveAll();
+        for (Category category : categories) {
+            System.out.println("Category : " + category);
+        }
         assertNotNull(categories);
         assertFalse(categories.isEmpty());
     }

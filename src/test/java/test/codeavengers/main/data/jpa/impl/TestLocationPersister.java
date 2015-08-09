@@ -47,7 +47,7 @@ public class TestLocationPersister extends ObjectMockingUtility {
     @Rollback(true)
     @Test
     public void testUpdate() {
-        LocationMaster location = persister.retrieve(112L);
+        LocationMaster location = persister.retrieve(212L);
         assertNotNull(location);
 
         location.setArea("Kolkata");

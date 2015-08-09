@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.codeavengers.common.dto.entity.Category;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
+import org.hibernate.Criteria;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
@@ -107,7 +108,7 @@ public class CategoryPersister extends AbstractJPAPersister<Long, Category> {
     @SuppressWarnings("unchecked")
     @Override
     public List<Category> retrieveAll() {
-        return this.getSession().createCriteria(Category.class).list();
+        return this.getSession().createCriteria(Category.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
 }

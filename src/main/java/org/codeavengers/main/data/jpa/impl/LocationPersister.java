@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.codeavengers.common.dto.entity.LocationMaster;
 import org.codeavengers.main.data.jpa.AbstractJPAPersister;
+import org.hibernate.Criteria;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
@@ -108,7 +109,7 @@ public class LocationPersister extends AbstractJPAPersister<Long, LocationMaster
     @SuppressWarnings("unchecked")
     @Override
     public List<LocationMaster> retrieveAll() {
-        return this.getSession().createCriteria(LocationMaster.class).list();
+        return this.getSession().createCriteria(LocationMaster.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
     }
 
 }
